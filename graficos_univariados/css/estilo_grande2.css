@@ -1,6 +1,6 @@
 *
 {
-	font: 16px/19px "Lucida Sans Unicode","Lucida Sans", "Bitstream Vera Sans", "DejaVu Sans";
+	font: 18px/21px "Fira Sans", sans-serif;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -35,12 +35,12 @@ sub, sup {font-size: 10px;}
 	text-indent:-9999px;
 	width:15px;
 	height:15px;
-	
+
 }
 
 .esperando .input_radio .radio { background-position: -30px 0 !important; }
 .radio_checado { background-position: -15px 0; }
-.input_radio .radio { margin-left:30px; margin-bottom: 5px; margin-right: 5px; }
+.input_radio .radio { margin-left:30px; margin-bottom: 5px; margin-right: 5px;}
 #questoes .questao .input_radio .incorreto .radio { background-color:transparent !important;}
 #questoes .questao .input_radio .correto .radio { background-color:transparent !important;}
 
@@ -55,7 +55,7 @@ sub, sup {font-size: 10px;}
 	width:20px;
 	height:20px;
 	margin-right: 10px;
-	
+
 }
 
 .check_checado { background-position: 0 0; }
@@ -64,14 +64,14 @@ sub, sup {font-size: 10px;}
 
 /* definições básicas */
 
-.ancora 
+.ancora
 {
 	list-style-type: none !important;
 	margin: 0 !important;
 	padding: 0 !important;
 	text-decoration: none !important;
 	border: none !important;
-}	
+}
 
 .botao {height:29px; font-size: 14px; margin-right:7px; padding-bottom: 2px; text-align:center; border: 2px outset #CCC;}
 .botao:active{border: 2px inset #CCC;}
@@ -102,7 +102,7 @@ sub, sup {font-size: 10px;}
 	height: auto;
 	margin-left: -20px;
 	width: 100%;
-	z-index: 1;	
+	z-index: 1;
 }
 
 #fichas
@@ -145,20 +145,20 @@ sub, sup {font-size: 10px;}
 
 .parte_feita a
 {
-	
+
 	background: url(../img_layout/parte_feita.gif) no-repeat;
 	z-index: 3;
 }
 
 .parte_quase_feita a
 {
-	
+
 	background: url(../img_layout/parte_quase_feita.gif) no-repeat;
 	z-index: 3;
 }
 
 
-.parte_atual 
+.parte_atual
 {
 	font-size: 18px;
 	width: 31px;
@@ -350,7 +350,7 @@ sub, sup {font-size: 10px;}
 	width: 240px;
 	text-align: right;
 	margin-top: 5px;
-	
+
 }
 
 #links a
@@ -640,13 +640,17 @@ p .formula
 #questoes .questao .input_texto .sem_margem {margin: 0 !important;}
 .sem_margem {margin: 0 !important;}
 
-#questoes .questao .input_radio input{ margin-right: 5px;}
+#questoes .questao .input_radio input{ margin-right: 5px; border: 0 !important; height: auto; background: none !important;}
 #questoes .questao .input_radio label span{ padding: 0 3px; margin-right: 12px;}
 #questoes .questao .questao_item.grande .input_radio div{ width: 648px; float: left;}
 #questoes .questao .input_radio .correto label{background: url(../img_layout/certinho.gif) bottom right no-repeat; }
 #questoes .questao .input_radio .correto span{background-color: #beff73;}
 #questoes .questao .input_radio .incorreto label{background: url(../img_layout/erradinho.gif) bottom right no-repeat; }
 #questoes .questao .input_radio .incorreto span{background-color: #ffb47f;}
+
+#questoes .questao .input_check input{ margin-right: 5px; border: 0 !important; height: auto !important; background: none !important;}
+#questoes .questao .input_check label span{ padding: 0 3px; margin-right: 12px;}
+#questoes .questao .questao_item.grande .input_check div{ width: 648px; float: left;}
 
 #questoes .questao .texto p{ margin-left: 30px; width: 318px !important;}
 
@@ -704,7 +708,7 @@ p .formula
 
 #questoes .questao .selecionada .ajuda:hover, #questoes .questao .selecionada .ajuda.ativo
 {
-	background-position: bottom center; 
+	background-position: bottom center;
 }
 
 
@@ -864,7 +868,7 @@ p .formula
 	width: 245px;
 	height: 261px;
 	background: url(../img_layout/calc.gif) no-repeat;
-	position: fixed; 
+	position: fixed;
 	bottom: 58px;
 	left: 39px;
 	z-index: 1201;
@@ -890,7 +894,7 @@ p .formula
 
 #link_continuar.ativado
 {
-	background: url(../img_layout/continuar-amarelo-ativado.gif) no-repeat;	
+	background: url(../img_layout/continuar-amarelo-ativado.gif) no-repeat;
 }
 
 #rodape
@@ -965,7 +969,7 @@ p .formula
 
 .escondido{visibility: hidden; display: none;}
 .some {position: absolute; left: -6000px;}
-.limpador{clear: both;}
+.limpador{clear: both; height: 0px;}
 
 
 .recipiente.errado {background: #ffb47f url(../img_layout/erradinho.gif) bottom right no-repeat !important;}
