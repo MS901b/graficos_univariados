@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"  xml:lang = "pt-br"  lang = "pt-br">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<link rel="stylesheet" type="text/css" href="css/curiosidade_transicao.css" media="screen, projection" title="normal"/>
+		<link rel="alternate stylesheet" type="text/css" href="css/curiosidade_transicao2.css" media="screen, projection" title="grande"/>
+		
+		<link rel="stylesheet" type="text/css" href="css/popup.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="css/notas.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="css/bloco.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="css/calculadora.css" media="screen, projection" />
+
+		
+		<script type="text/javascript" src="scripts/protoaculous.js"></script>
+		<script type="text/javascript" src="scripts/AC_RunActiveContent.js"></script>
+		<script type="text/javascript" src="scripts/popup.js"></script>
+		<script type="text/javascript" src="scripts/notas.js"></script>
+		<script type="text/javascript" src="scripts/bloco.js"></script>
+		<script type="text/javascript" src="scripts/calculadora.js"></script>
+		<script type="text/javascript" src="scripts/interface.js"></script>
+		<script type="text/javascript" src="scripts/referencias.js"></script>
+		<script type="text/javascript" src="scripts/curiosidades.js"></script>
+		
+		<script type="text/javascript" src="scripts/conteudo_introducao.js"></script>
+		<script type="text/javascript" src="scripts/funcoes_gerais.js"></script>
+		<script type="text/javascript" src="scripts/transicao.js"></script>
+		
+		<script type="text/javascript">
+			var PosicaoAtual = {Atividade: 0, Parte: 0};
+			var nomeSoft = 'estat';
+		
+			var Links = $H({
+				freqAb: {
+					conteudo: 'Chama-se "frequência absoluta" o número de vezes que um valor da variável é observado em um determinado conjunto de dados.',
+					layout: ['seta_baixo', 'esquerda'],
+					largura: 10
+				},
+				freqRel: {
+					conteudo: ' A frequência relativa é definida como a razão entre a frequência absoluta e o número total de dados.',
+					layout: ['seta_baixo', 'esquerda'],
+					largura: 10
+				},
+				moda: {
+					conteudo: 'Chama-se "moda" o valor mais frequente de um grupo de valores observados.',
+					layout: ['seta_baixo', 'esquerda'],
+					largura: 10
+				},
+				mediana: {
+					conteudo: 'A mediana é um valor m que satisfaz os seguintes critérios: pelo menos metade da amostra assume valores maiores ou iguais a m, e pelo menos metade da amostra assume valores menores ou iguais a m.',
+					layout: ['seta_baixo', 'esquerda'],
+					largura: 10
+				},
+				media: {
+					conteudo: 'Para obter a média de um conjunto de dados, basta dividir a soma de todos os valores da amostra pelo número total de valores.',
+					layout: ['seta_baixo', 'esquerda'],
+					largura: 10
+				}
+		
+			});		
+		
+			Event.observe(window, 'load', function(){
+
+			var dadosSexo = eval(getResp('vetorSexo'));
+			
+			var totalE = dadosSexo[0].freq + dadosSexo[1].freq;
+			var nM, nF;
+			
+			if (dadosSexo[0].dado == 'M') {
+				nM = dadosSexo[0].freq;
+				nF = dadosSexo[1].freq;
+			} else {
+				nM = dadosSexo[1].freq;
+				nF = dadosSexo[0].freq;	
+			}
+			
+			var relauxF, relauxM;
+			relF = (nF / totalE) * 100;
+			relauxF = Math.round( relF);
+			
+			relM = (nM / totalE) * 100;
+			relauxM = Math.round( relM);
+			
+			$('relativo_f').update(relauxF/100);
+			$('relativo_m').update(relauxM/100);		
+			
+			$('absoluto_f').update(nF);
+			$('absoluto_m').update(nM);				
+			$('absoluto_total').update(nF + nM);		
+
+			});
+			
+			Event.observe(window, 'load', function(){			
+				setResp('transicao_1', 3);
+			});
+			
+		</script>
+		<style type="text/css">
+		<!--
+		.tabelamanual {float: left; padding: 0; border: 1px solid #000; border-collapse: collapse; table-layout: fixed;  width: 20px; background: #FFF;}
+		.tabelamanual th{ background: #000; height: 20px; color: #fff; text-align: center; border-right: 1px solid #FFF; font-size: 11px; overflow: hidden;}
+		.tabelamanual th.ultima_borda { border-right: 1px solid #000; }
+		.tabelamanual td {
+			font-size: 11px;
+			color: #000;
+			text-align: center;
+			height: 22px;
+			border-width: 1px;
+			padding: 0 2px;
+			border-style: dotted solid;
+			border-color: #AAA #000;
+			overflow: hidden;
+		}
+		-->
+		</style>		
+		
+		
+		<title>Medidas do corpo: Gráficos Univariados</title>
+	</head>
+	<body>		
+		<div id="container">
+			<div id="cabecalho">
+				<div id="onde_estou">
+					<div class="transicao">&nbsp;</div>
+					<h1>Medidas do Corpo</h1><img src="img_layout/setinha-cabecalho.gif" alt=""/><h2>Gráficos Univariados</h2> 
+				</div>
+				<div id="logo"></div>
+				<div id="links">
+					<a href="mapa.html">Mapa</a>
+					<a href="introducao.html">Introdução</a>
+					<a href="index.html">Início</a>
+				</div>
+				<br class="limpador" />
+			</div>
+			
+			<!-- deve ficar vazio mesmo, é só pra se adptar ao layout e não precisar de outro css -->
+			<ul id="curiosidades"></ul>
+			
+			<div id="principal">
+				<div id="conteudo">		
+					<div class="salva_local">
+						<object id="SalvaLocal" name="SalvaLocal" type="application/x-shockwave-flash" data="applets/SalvaLocal.swf" width="1" height="1">
+						<param name="menu" value="false" />
+						<param name="movie" value="applets/SalvaLocal.swf" />						
+						</object>
+					</div>	
+					<div class="texto">
+						<p>Os métodos da Estatística Descritiva podem ser usados para organizar, resumir, descrever e interpretar um conjunto de dados. A seguir, você irá relembrar alguns conceitos básicos de estatística para que possa se aprofundar no estudo das representações gráficas de dados. </p>
+						<p>Gráficos são de extrema importância, pois permitem uma assimilação rápida e clara de inúmeras informações. Assim, essa representação é uma das mais recorrentes nos meios de comunicação.</p>
+						<br>
+						<p>O quadro abaixo apresenta em tabelas de frequência os dados digitados anteriormente para a variável "gênero":</p>
+						<!--<div id="dadosEntrada" style="overflow:auto; height: 100px; width: 300px;"> -->
+						
+			
+							<table border="0" style="width:280px; !important;">
+								<tr>
+									<td valign="top">
+										<table id="tabelaDados" name="tabelaDados" class="tabela">
+											<THEAD>
+												<tr>
+													<th class="largura3" style="width:150px;  !important;" >Gênero</th>
+													<th class="largura3" style="width:250px; !important;"><a id="freqAb">Frequência absoluta</a></th>
+													<th class="largura3" style="width:250px; !important;"><a id="freqRel">Frequência relativa</a></th>
+												</tr>
+												<tr>
+													<td>M</td>
+													<td><span id="absoluto_m"></span></td>
+													<td><span id="relativo_m"></span></td>
+												</tr>													
+												<tr>
+													<td>F</td>
+													<td><span id="absoluto_f"></span></td>
+													<td><span id="relativo_f"></span></td>
+												</tr>
+
+												<tr>
+													<td>Total</td>
+													<td><span id="absoluto_total"></span></td>
+													<td><span id="absoluto_total">100%</span></td>
+												</tr>											
+											</THEAD>
+											<TBODY>
+											</TBODY>
+										</table>
+									</td>
+									
+								</tr>
+							</table>						
+						<!--</div>-->
+						<br>
+						<p>
+						Para uma variável numérica, pode ser interessante definir um valor, ou um conjunto de valores, que resuma a informação encontrada na amostra. Esses valores são chamados "medidas resumo" da variável. Um exemplo de medidas resumo são as chamadas "medidas de tendência central", como a <a id="moda">moda</a>, a <a id="media">média</a> e a <a id="mediana">mediana</a>.</p>	
+						<p>A decisão sobre qual destas medidas resume melhor a informação da amostra depende da amostra em si. Por exemplo, se uma família tiver integrantes com idades 1, 3, 3, 3, 30 e 32, a idade modal e a idade mediana da família serão iguais a 3 anos, ao passo que a idade média da família será de 12 anos. Como os dados são muito discrepantes, uma solução é entregar medidas resumo para cada um dos subgrupos da amostra: idade média dos filhos e idade média dos pais, por exemplo.</p>
+						<p>Nas próximas atividades, você irá explorar as representações gráficas de conjuntos de dados:</p>
+
+						
+						<div class="a_direita">
+							<a href="mapa.html">Ir para o mapa</a>
+						</div>
+						
+						<br class="limpador" />
+						
+						<div class="atividade">
+							<div id="pai_atividade2" class="espacador">
+								<div class="qual">
+									<div id="atividade2" class="numero_atividade aberta"><a href="atividade2_parte1.html">2</a></div>
+									<!--<div class="titulo"><h1><a id="qualitativa">Variável qualitativa</a> e <a id="discreta">quantitativa discreta</a></h1></div>-->
+									<div class="titulo"><h1>Variável qualitativa e quantitativa discreta</h1></div>
+								</div>
+								<br class="limpador" />
+								<div class="descricao">Nesta atividade, serão construídos gráficos de barra e de setor para a variável “gênero”. Serão estudados os mesmos tipos de gráficos para o número do calçado, explorando proporções e categorias.</div>								
+							</div>
+						</div>
+						
+						<div class="atividade">
+							<div id="pai_atividade3" class="espacador">
+								<div class="qual">
+									<div id="atividade3" class="numero_atividade aberta"><a href="atividade3_parte1.html">3</a></div>
+									<!--<div class="titulo"><h1><a id="continua">Variável quantitativa contínua</a></h1></div>-->
+									<div class="titulo"><h1>Variável quantitativa contínua</h1></div>
+								</div>
+								<div class="descricao">Serão apresentados o histograma e as inúmeras informações que podem ser obtidas por meio dessa representação gráfica.</div>
+								<br class="limpador" />
+							</div>
+						</div>
+						
+						
+						
+						<br class="limpador" />
+
+					</div>
+					
+					
+					
+
+					
+					
+				</div>
+			</div>
+			<br class="limpador" />
+			<div id="rodape">
+				<a href="http://m3.mat.br" target="_blank">Sobre o Matemática Multimídia</a>
+			</div>
+		</div>
+		<div id="ferramentas">
+			<a href="javascript:;" onclick="return false;" id="link_notas"><span class="escondido">referencias</span></a>
+			<a href="javascript:;" onclick="return false;" id="link_bloco"><span class="escondido">bloco de notas</span></a>
+			<a href="javascript:;" id="link_calculadora" onclick="javascript:calculadora();"><span class="escondido">calculadora</span></a>
+			<a href="javascript:setActiveStyleSheet('grande');" id="link_acessibilidade"><span class="escondido">acessibilidade</span></a>
+		</div>
+		<div id="calc" class="escondido"></div>		
+
+	</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recurso>
+    <titulo>Medidas do Corpo - Gráficos Univariados</titulo>
+    <descricao>Neste software, o aluno irá estudar um pouco de estatística descritiva utilizando dados de três variáveis: gênero, altura e número do calçado. Vamos explorar vários tipos diferentes de gráﬁcos de frequências para uma variável e suas características, bem como introduzir a noção de quantil. Este software faz parte de uma sequência de softwares de estatística que utilizam o mesmo conjunto de dados.</descricao>
+    <estado>finalizado</estado>
+	<imagem>logo.jpg</imagem>
+	<tipo>software educacional</tipo>
+	<objetivos>Analisar representação gráﬁca de dados estatísticos; Familiarizar o aluno com gráﬁcos de barras, setores e histograma; Introduzir o conceito de quantil.</objetivos>
+	<observacoes>É necessário plugin Flash 9.0 ou mais recente e máquina Java 1.6 ou mais recente.</observacoes>
+	<nivel>Ensino Médio</nivel>
+	<componente>Matemática</componente>
+	<temas>Análise de dados e Probabilidade</temas>
+	<autores>Laura Leticia Ramos Rifo</autores>
+	<palavras_chaves>Unicamp, Projeto M³, software educacional, matemática, estatística, corpo humano, gráficos,</palavras_chaves>
+	<assunto>Estatística, Interpretação de Gráﬁcos e Dados; Gráﬁcos de Barras, Setores e Histograma; Quantis.</assunto>
+</recurso>
+
+
+
+ 

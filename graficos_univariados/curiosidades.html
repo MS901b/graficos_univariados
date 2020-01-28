@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"  xml:lang = "pt-br"  lang = "pt-br">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<link rel="stylesheet" type="text/css" href="css/curiosidade_transicao.css" media="screen, projection" title="normal"/>
+		<link rel="alternate stylesheet" type="text/css" href="css/curiosidade_transicao2.css" media="screen, projection" title="grande"/>
+		
+		
+		<link rel="stylesheet" type="text/css" href="css/popup.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="css/notas.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="css/bloco.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="css/calculadora.css" media="screen, projection" />
+
+		
+		<script type="text/javascript" src="scripts/protoaculous.js"></script>
+		<script type="text/javascript" src="scripts/AC_RunActiveContent.js"></script>
+		<script type="text/javascript" src="scripts/popup.js"></script>
+		<script type="text/javascript" src="scripts/notas.js"></script>
+		<script type="text/javascript" src="scripts/bloco.js"></script>
+		<script type="text/javascript" src="scripts/calculadora.js"></script>
+		<script type="text/javascript" src="scripts/curiosidades.js"></script>
+		
+		<script type="text/javascript" src="scripts/interface.js"></script>
+		<script type="text/javascript" src="scripts/referencias.js"></script>
+		<script type="text/javascript" src="scripts/curiosidades.js"></script>
+		
+		
+		<script type="text/javascript">
+			var PosicaoAtual = {Atividade: 0, Parte: 0};
+			var Partes = null;
+			var nomeSoft = 'estat';
+			var Questoes = null;
+			
+			Event.observe(document, 'flash:SalvaLocal', function(ev) {
+				$('SalvaLocal').Salva('estat', 'curiosidade_c1', '3');
+			});				
+			
+		</script>
+		
+		<title>Medidas do corpo: Gráficos Univariados</title>
+	</head>
+	<body>
+
+	<object id="SalvaLocal" name="SalvaLocal" type="application/x-shockwave-flash" data="applets/SalvaLocal.swf" width="1" height="1">
+		<param name="menu" value="false" />
+		<param name="movie" value="applets/SalvaLocal.swf" />
+	</object>
+	
+		<div id="container">
+			<div id="cabecalho">
+				<div id="onde_estou">
+					<div class="curiosidade">&nbsp;</div>
+					<h1>Gráficos Univariados</h1> <img src="img_layout/setinha-cabecalho.gif" alt=""/> <h2>Curiosidades</h2>
+				</div>
+				<div id="logo"></div>
+				<div id="links">
+					<a href="mapa.html">Mapa</a>
+					<a href="introducao.html">Introdução</a>
+					<a href="index.html">Início</a>
+				</div>
+				<br class="limpador" />
+			</div>
+			
+			<ul id="curiosidades">
+				<li id="c1" class="curiosidade" ><a href="javascript:navegaCuriosidade('c1');">1</a></li>
+			</ul>
+			
+			<div id="principal">
+				<div id="conteudo">					
+					<div class="salva_local">
+						<object id="SalvaLocal" name="SalvaLocal" type="application/x-shockwave-flash" data="applets/SalvaLocal.swf" width="1" height="1">
+						<param name="menu" value="false" />
+						<param name="movie" value="applets/SalvaLocal.swf" />						
+						</object>
+					</div>					
+					<div id="curiosidadec1" class="texto">
+						<h2>Veja um trecho de uma matéria de jornal:</h2>
+						<p>Pesquisas recentes do IBGE – Instituto Brasileiro de Geografia e Estatística – coletaram informações sobre a renda mensal das famílias do país. Os dados estão representados no histograma abaixo.</p>
+						
+						<img src="imgs/grafico.jpg" />
+
+
+						
+						<p>A comparação desses dados com os de outros países mostra que o Brasil está entre as piores distribuições de renda. Para montar o ranking de distribuição de renda comparou-se a porcentagem da renda total do país que fica com a metade mais pobre da população.</p>
+						<p>O Brasil tem apenas 14,4% da renda nacional com metade da população. Isto é, a outra metade, mais rica, detêm 85,6% de toda a renda!</p>
+						
+						<hr />
+						
+						<p>Note que essa matéria ilustra um uso interessante de quantis. O quantil <span style="font-style:italic">p</span>, com <img src="imgs/eq_curiosidade.png" style="position:relative; top:5px; "/>, é o valor da amostra abaixo do qual estão os (100.<span style="font-style:italic">p</span>)% dos dados.</p>
+						<p>A população está dividida em fatias de 10%, ou seja, em quantis 0,1. Com as informações da participação na renda nacional de cada um dos quantis 10% da população pode-se analisar várias situações, por exemplo, mais de 60% da renda nacional está com a fatia dos 20% mais ricos.</p>
+					
+						<div id="voltar" class="a_esquerda">
+							<div class="a_direita">
+								<div class="a_esquerda apontador">
+									<a id="voltar_curiosidade" href="javascript:history.go(-1);">Voltar</a>
+								</div>
+								<div class="a_esquerda seta_apontador"></div>
+							</div>
+						</div>
+						
+						<br class="limpador" />
+
+					</div>
+				</div>
+			</div>
+			<br class="limpador" />
+			<div id="rodape">
+				<a href="http://m3.mat.br" target="_blank">Sobre o Matemática Multimídia</a>
+			</div>
+		</div>
+		
+		<div id="ferramentas">
+			<a href="javascript:;" onclick="return false;" id="link_notas"><span class="escondido">referencias</span></a>
+			<a href="javascript:;" onclick="return false;" id="link_bloco"><span class="escondido">bloco de notas</span></a>
+			<a href="javascript:;" id="link_calculadora" onclick="javascript:calculadora();"><span class="escondido">calculadora</span></a>
+			<a href="javascript:setActiveStyleSheet('grande');" id="link_acessibilidade"><span class="escondido">acessibilidade</span></a>
+		</div>
+		<div id="calc" class="escondido"></div>
+
+	</body>
+</html>
