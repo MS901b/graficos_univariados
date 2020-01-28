@@ -12,7 +12,7 @@ var Alertou = false, iQuestao = 0;
 var incorreta = null;
 
 var corrigindo = false;
-var interface_salva_local_loaded = false;
+var interface_salva_local_loaded = true;
 var interface_document_loaded = false;
 
 var Letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','W','Y','Z'];
@@ -20,6 +20,7 @@ var Letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q
 
 Event.observe(window, 'load', function()
 {
+	gerenciaParte()
 	// trata do css (grande e normal) gerenciado por cookie
 	css = readCookie('css');
 	if (css == 'grande')
