@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <software nome="estat">
 	<msgFinal>Parabéns, você concluiu todas as atividades deste software!</msgFinal>
-	
+
 	<!-- 1: 1a Atividade -->
 	<item>
+		<id>a1</id>
 		<tipo>atividade</tipo>
 		<rotulo>1</rotulo>
 		<nome>Atividade 1</nome>
@@ -16,6 +17,7 @@
 
 	<!-- 2: texto longo -->
 	<item>
+		<id>t1</id>
 		<tipo>transicao</tipo>
 		<nome>Transição</nome>
 		<descricao>Tela de transição.</descricao>
@@ -24,11 +26,12 @@
 			<altura>0</altura>
 		</posicao>
 		<ligacoes>
-			<com>1</com>			
+   			<com>a1</com>
 		</ligacoes>
 	</item>	
 	
 	<item>
+		<id>a2</id>
 		<tipo>atividade</tipo>
 		<rotulo>2</rotulo>
 		<nome>Variável qualitativa e quantitativa discreta</nome>
@@ -38,11 +41,12 @@
 			<altura>1</altura>
 		</posicao>
 		<ligacoes>
-			<com>2</com>
+			<com>a1</com>
 		</ligacoes>
 	</item>
 	
 	<item>
+		<id>a3</id>
 		<tipo>atividade</tipo>
 		<rotulo>3</rotulo>
 		<nome>Variável quantitativa contínua</nome>
@@ -52,7 +56,7 @@
 			<altura>-1</altura>
 		</posicao>
 		<ligacoes>
-			<com>2</com>
+			<com>a2</com>
 		</ligacoes>
 	</item>
 
