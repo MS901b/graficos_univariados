@@ -23,7 +23,7 @@ var Letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q
 
 Event.observe(window, 'load', function()
 {
-	gerenciaParte()
+	gerencia_partes()
 	// trata do css (grande e normal) gerenciado por cookie
 	css = readCookie('css');
 	if (css == 'grande')

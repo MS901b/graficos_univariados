@@ -20,25 +20,17 @@ var Letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q
 
 Event.observe(window, 'load', function()
 {
-	gerenciaParte()
+	gerencia_partes()
 	// trata do css (grande e normal) gerenciado por cookie
 	css = readCookie('css');
-	if (css == 'grande')
-	{
-		for(i=0; (a = document.getElementsByTagName("link")[i]); i++) 
-		{
-			if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) 
-			{
-				a.disabled = true;
-				if(a.getAttribute("title") == 'grande') a.disabled = false;
-			}
-		}
-		$('link_acessibilidade').href = 'javascript:setActiveStyleSheet("normal");';
-	}
-	else
-	{
-		$('link_acessibilidade').href = 'javascript:setActiveStyleSheet("grande");';
-	}
+    for(i=0; (a = document.getElementsByTagName("link")[i]); i++)
+    {
+        if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title"))
+        {
+            a.disabled = true;
+            if(a.getAttribute("title") == 'grande') a.disabled = false;
+        }
+    }
 });
 
 Event.observe(document, 'flash:SalvaLocal', function(ev)
