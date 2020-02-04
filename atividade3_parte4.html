@@ -5,8 +5,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 		<link rel="stylesheet" type="text/css" href="css/estilo.css" media="screen, projection" title="normal"/>
 		<link rel="alternate stylesheet"  type="text/css" href="css/estilo2.css" title="grande" />
-		
-		
+     	<meta name=viewport content="width=device-width,initial-scale=1">
+		<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="css/popup.css" media="screen, projection" />
 		<link rel="stylesheet" type="text/css" href="css/notas.css" media="screen, projection" />
 		<link rel="stylesheet" type="text/css" href="css/bloco.css" media="screen, projection" />
@@ -172,21 +173,25 @@
 		<div id="applet">
 			<div id="borda_applet" class="altura_applet_4 borda sem_fundo">
 
-				<applet name="ggbApplet" code="geogebra.GeoGebraApplet" codebase="./" archive="jars/geogebra.jar" width="519" height="380" MAYSCRIPT>
-					<param name="filename" value="applets/chart.ggb" />
-					<param name="framePossible" value="false" />
-					<param name="showResetIcon" value="false" />
-					<param name="enableRightClick" value="false" />
-					<param name="showMenuBar" value="false" />
-					<param name="showToolBar" value="false" />
-					<param name="showToolBarHelp" value="false" />
-					<param name="showAlgebraInput" value="false" />
-					<param name="scriptable" value="true" />   
-					<param name="language" value="en" /> 	
-					<param name="enableShiftDragZoom" value="false" />	
-					<param name="enableChooserPopups" value="false" />					
-				</applet>				
-
+					<script>
+					 var ggbApp = new GGBApplet({
+    					 "appName": "classic",
+   						 "width": 519, "height": 380,
+						 "filename": "applets/graficos-genero.ggb",
+						 "showResetIcon": "false",
+						 "enableRightClick": "false",
+						 "showMenuBar": "false",
+						 "showToolBar": "false",
+						 "showToolBarHelp": "false",
+						 "showAlgebraInput": "false",
+						 "enableLabelDrags": "false",
+						 "enableShiftDragZoom": "false",
+						 "useBrowserForJS": "true"
+					}, true);
+					window.addEventListener("load", function() {
+					ggbApp.inject('ggbApplet');
+					});
+					</script>
 				
 				<div class="canto sup_esq"></div>
 				<div class="canto sup_dir"></div>
