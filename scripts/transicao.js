@@ -1,7 +1,7 @@
 ﻿// Transicao
 
-var iniciou_sl=false;
-var iniciou_tela=false;
+var iniciou_sl=true;
+var iniciou_tela=true;
 
 Event.observe(window, 'load', function(){
 	iniciou_tela=true;

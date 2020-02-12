@@ -520,8 +520,8 @@ document.observe("dom:loaded", function()
 	
 	
 	Event.observe('link_bloco', 'click', function(){
-		var abre = !BlocoNotas.divCont.visible();
-		fechaFerramentas();
+		var abre = BlocoNotas && BlocoNotas.divCont && !BlocoNotas.divCont.visible();
+        if (BlocoNotas) fechaFerramentas();
 		if(abre)
 			BlocoNotas.abre();
 	});
