@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<software nome="estat">
+	<msgFinal>Parabéns, você concluiu todas as atividades deste software!</msgFinal>
+	
+	<!-- 1: 1a Atividade -->
+	<item><id>a1</id>
+		<tipo>atividade</tipo>
+		<rotulo>1</rotulo>
+		<nome>Atividade 1</nome>
+		<descricao>Nesta atividade, você terá que preencher uma tabela de três colunas com os seguintes dados sobre seus colegas de sala de aula: gênero, número do calçado e altura. </descricao>
+		<posicao>
+			<coluna>1</coluna>
+			<altura>0</altura>
+		</posicao>
+	</item>
+
+	<!-- 2: texto longo -->
+	<item><id>t1</id>
+		<tipo>transicao</tipo>
+		<nome>Transição</nome>
+		<descricao>Tela de transição.</descricao>
+		<posicao>
+			<coluna>1.5</coluna>
+			<altura>0</altura>
+		</posicao>
+		<ligacoes>
+			<com>a1</com>			
+		</ligacoes>
+	</item>	
+	
+	<item><id>a2</id>
+		<tipo>atividade</tipo>
+		<rotulo>2</rotulo>
+		<nome>Variável qualitativa e quantitativa discreta</nome>
+		<descricao>Nesta atividade, serão construídos gráficos de barra e de setor para a variável “gênero”. Serão estudados os mesmos tipos de gráficos para o número do calçado, explorando proporções e categorias.</descricao>
+		<posicao>
+			<coluna>2</coluna>
+			<altura>1</altura>
+		</posicao>
+		<ligacoes>
+			<com>t1</com>
+		</ligacoes>
+	</item>
+	
+	<item><id>a3</id>
+		<tipo>atividade</tipo>
+		<rotulo>3</rotulo>
+		<nome>Variável quantitativa contínua</nome>
+		<descricao>Serão apresentados o histograma e as inúmeras informações que podem ser obtidas por meio dessa representação gráfica.</descricao>
+		<posicao>
+			<coluna>2</coluna>
+			<altura>-1</altura>
+		</posicao>
+		<ligacoes>
+			<com>t1</com>
+		</ligacoes>
+	</item>
+
+	<curiosidades>
+		<curiosidade>
+			<titulo>Distribuição de renda</titulo>
+			<id>c1</id>
+		</curiosidade>
+	</curiosidades>	
+	
+</software>

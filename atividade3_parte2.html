@@ -5,7 +5,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 		
 		<link rel="stylesheet" type="text/css" href="css/estilo.css" media="screen, projection" title="normal"/>
 		<link rel="alternate stylesheet"  type="text/css" href="css/estilo2.css" title="grande" />
-		
+     	<meta name=viewport content="width=device-width,initial-scale=1">
+		<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+	
 		
 		<link rel="stylesheet" type="text/css" href="css/popup.css" media="screen, projection" />
 		<link rel="stylesheet" type="text/css" href="css/notas.css" media="screen, projection" />
@@ -44,8 +46,8 @@
 		<script type="text/javascript" src="scripts/inputs.js"></script>
 		<script type="text/javascript">
 			
-			var PosicaoAtual = {Atividade:3, Parte: 0};
-			var ProximaParte = 'atividade3_parte2.html';
+			var PosicaoAtual = {Atividade:3, Parte: 1};
+			var ProximaParte = 'atividade3_parte3.html';
 			
 			var nomeSoft = 'estat';
 			
@@ -66,15 +68,17 @@
 			});
 				
 			var Links = $H({
-				pontoMove: {
-					conteudo: '<img src="imgs/ponto_move.jpg" width="64px" alt=""/>',
-					layout: ['seta_baixo', 'esquerda'],
-					largura: 3
-				}
+
 			});
 				
 			var Perguntas = $H({
-
+                unset_inicial: {
+                    conteudo: 'Você deseja alterar o valor, isto fará com que você precise refazer as questões que tinham como base este valor?',
+                    layout: ['seta_baixo','direita'],
+                    largura: 10,
+                    callback: unset_inicial_p2,
+                    respostas: [{sim: 'Sim'}, {nao: 'Não'}]
+                }
 			});
 		</script>
 		
@@ -92,7 +96,7 @@
 			<div id="cabecalho">
 				<div id="onde_estou">
 					<div class="numero_atividade">3</div>
-					<h1>Gráficos Univariados</h1> <img src="img_layout/setinha-cabecalho.gif" alt=""/> <h2>Quantitativa contínua</h2>
+					<h1>Gráficos Univariados</h1> <img src="img_layout/setinha-cabecalho.gif" alt=""/> <h2>Quantitativa contínua</h2> 
 				</div>
 				<div id="logo"></div>
 				<div id="links">
@@ -112,7 +116,9 @@
 				<div id="conteudo">
 						
 					<div class="texto_solto">
-
+							<p>Os histogramas podem ser construídos de acordo com a quantidade de intervalos ou com a determinação dos extremos de cada classe. No primeiro caso, obtêm-se classes de mesma amplitude. Porém, ao se definir os extremos de cada intervalo, pode-se obter classes de tamanhos diferentes.</p>
+							<p>Nesta parte, será utilizado o número de intervalos para construir os histogramas.
+							</p>
 					</div>
 
 					
@@ -121,6 +127,19 @@
 					para iniciar, após iniciar, deve-se adicionar a classe "desabilitada" na div e desabilitar o input também.
 					É possível colocar mais de um item a ser inicializado por parte, mas somente a primeira terá o titulo em <h2>;
 					-->
+					<div id="valor_inicial" class="caixa valor_inicial">
+						<div class="item sem_titulo">
+							<p>Escolha um valor maior do que 1 que lhe pareça adequado para a quantidade de intervalos. Esse valor será mantido para as próximas três questões.</p>
+							<input id="input_valor_inicial" type="text"/>
+							<a id="link_valor_inicial" href="javascript:;" onclick="javascript:set_inicial_p2();">Definir valor</a>
+							<a id="unset_inicial">Alterar valor</a>
+							<script type="text/javascript">
+								$('unset_inicial').hide();
+							</script>							
+							<br class="limpador"></br>
+					
+						</div>
+					</div>					
 
 					<div id="questoes">
 					
@@ -129,18 +148,14 @@
 						Coloque aqui qualquer texto genérico de instruções e teoria.
 						-->
 						<div id="texto_generico">
-							<p>Para representar variáveis quantitativas contínuas, que é o caso da variável "altura", não se pode usar um simples gráfico de barras, pois os valores do eixo horizontal são intervalos numéricos (aqui chamados de "classes de frequências") e não apenas números. Por isso, serão usados histogramas. Observe o histograma no quadro ao lado.
-							</p>
-							<p>Os valores máximo e mínimo de altura dos alunos da sala serão os extremos do eixo horizontal do histograma. No eixo vertical, será representada a frequência relativa de cada classe.
-							</p>
+
 						</div>
 
 						
-						<div id="parte1_q1"></div>
-						<div id="parte1_q2"></div>
-						<div id="parte1_q3"></div>
-						<div id="parte1_q4"></div>
-						<div id="parte1_q5"></div>
+						<div id="parte2_q6"></div>
+						<p>O segmento de reta no quadro divide o histograma em duas partes. A área da parte esquerda do gráfico é indicada pelo valor ao lado do segmento.</p>
+						<div id="parte2_q7"></div>
+						<div id="parte2_q8"></div>
 						
 						<!-- Aqui vão ser colocadas as questões, via JavaScript.-->
 						
@@ -160,21 +175,26 @@
 		</div>
 		<div id="applet">
 			<div id="borda_applet" class="altura_applet_4 borda sem_fundo">
-
-				<applet name="ggbApplet" code="geogebra.GeoGebraApplet" codebase="./" archive="jars/geogebra.jar" width="519" height="380" MAYSCRIPT>
-					<param name="filename" value="applets/chart.ggb" />
-					<param name="framePossible" value="false" />
-					<param name="showResetIcon" value="false" />
-					<param name="enableRightClick" value="false" />
-					<param name="showMenuBar" value="false" />
-					<param name="showToolBar" value="false" />
-					<param name="showToolBarHelp" value="false" />
-					<param name="showAlgebraInput" value="false" />
-					<param name="scriptable" value="true" />                                            
-					<param name="language" value="en" />     
-					<param name="enableShiftDragZoom" value="false" />										
-					<param name="enableChooserPopups" value="false" />					
-				</applet>				
+				<div id="ggbApplet"></div>
+					<script>
+					 var ggbApp = new GGBApplet({
+    					 "appName": "classic",
+   						 "width": 519, "height": 380,
+						 "filename": "applets/chart.ggb",
+						 "showResetIcon": "false",
+						 "enableRightClick": "false",
+						 "showMenuBar": "false",
+						 "showToolBar": "false",
+						 "showToolBarHelp": "false",
+						 "showAlgebraInput": "false",
+						 "enableLabelDrags": "false",
+						 "enableShiftDragZoom": "false",
+						 "useBrowserForJS": "true"
+					}, true);
+					window.addEventListener("load", function() {
+					ggbApp.inject('ggbApplet');
+					});
+					</script>
 
 				
 				<div class="canto sup_esq"></div>
@@ -192,7 +212,7 @@
 		</div>
 				
 			<div id="texto_generico">
-			</div>				
+			</div>
 		</div>
 		
 		<div id="ferramentas">
@@ -203,5 +223,6 @@
 		</div>
 		<div id="calc" class="escondido"></div>
 
+		
 	</body>
 </html>

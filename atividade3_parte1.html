@@ -2,10 +2,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns = "http://www.w3.org/1999/xhtml"  xml:lang = "pt-br"  lang = "pt-br">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 		
 		<link rel="stylesheet" type="text/css" href="css/estilo.css" media="screen, projection" title="normal"/>
 		<link rel="alternate stylesheet"  type="text/css" href="css/estilo2.css" title="grande" />
-		
+     	<meta name=viewport content="width=device-width,initial-scale=1">
+		<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+	
 		
 		<link rel="stylesheet" type="text/css" href="css/popup.css" media="screen, projection" />
 		<link rel="stylesheet" type="text/css" href="css/notas.css" media="screen, projection" />
@@ -35,21 +37,17 @@
 		
 		<!-- O arquivo exemplo_correcao.js que contem as funções que corrigem, deve ser incluido antes do exemplo_conteudo.js-->
 		<!-- O arquivo inputs.js deve ser incluído por último -->
-		<script type="text/javascript" src="scripts/frequencias.js"></script>
 		<script type="text/javascript" src="scripts/funcoes_gerais.js"></script>
-		<script type="text/javascript" src="scripts/atividade2_correcao.js"></script>
-		<script type="text/javascript" src="scripts/atividade2_conteudo.js"></script>
-		
-		<!--<script type="text/javascript" src="scripts/exemplo_correcao.js"></script>
-		<script type="text/javascript" src="scripts/exemplo_conteudo.js"></script>
-		-->
+		<script type="text/javascript" src="scripts/frequencias.js"></script>
+		<script type="text/javascript" src="scripts/atividade3_correcao.js"></script>
+		<script type="text/javascript" src="scripts/atividade3_conteudo.js"></script>
 		<!--<script type="text/javascript" src="scripts/tabela_funcoes.js"></script>-->
 
 		<script type="text/javascript" src="scripts/inputs.js"></script>
 		<script type="text/javascript">
 			
-			var PosicaoAtual = {Atividade:2, Parte: 2};
-			var ProximaParte = 'mapa.html';
+			var PosicaoAtual = {Atividade:3, Parte: 0};
+			var ProximaParte = 'atividade3_parte2.html';
 			
 			var nomeSoft = 'estat';
 			
@@ -70,12 +68,18 @@
 			});
 				
 			var Links = $H({
+				pontoMove: {
+					conteudo: '<img src="imgs/ponto_move.jpg" width="64px" alt=""/>',
+					layout: ['seta_baixo', 'esquerda'],
+					largura: 3
+				}
 			});
 				
 			var Perguntas = $H({
 
 			});
 		</script>
+		
 		
 		
 		<title>Medidas do corpo: Gráficos Univariados</title>
@@ -89,8 +93,8 @@
 		<div id="container">
 			<div id="cabecalho">
 				<div id="onde_estou">
-					<div class="numero_atividade">2</div>
-					<h1>Gráficos Univariados</h1> <img src="img_layout/setinha-cabecalho.gif" alt=""/> <h2>Qualitativa e quantitativa discreta</h2>
+					<div class="numero_atividade">3</div>
+					<h1>Gráficos Univariados</h1> <img src="img_layout/setinha-cabecalho.gif" alt=""/> <h2>Quantitativa contínua</h2>
 				</div>
 				<div id="logo"></div>
 				<div id="links">
@@ -101,19 +105,16 @@
 				
 				<div class="limpador"></div>
 			</div>
-			<!-- Por enquanto o controle de  trancadas não será implementado-->
+			<!-- Por enquanto o controle de partes trancadas não será implementado-->
 			<ul id="partes">
+												
 			</ul>
 			
 			<div id="software">
-				<div id="conteudo">			
-									
-					<div class="texto_solto">
-						<p>As proporções que você calculou na parte 2 podem ajudar a definir divisões do conjunto de dados que classifiquem a amostra em categorias. Por exemplo: pé pequeno e pé grande.
-						</p>
-						<p>Para definir as categorias, determine os intervalos que elas devem abranger.
-						</p>
+				<div id="conteudo">
 						
+					<div class="texto_solto">
+
 					</div>
 
 					
@@ -130,9 +131,21 @@
 						Coloque aqui qualquer texto genérico de instruções e teoria.
 						-->
 						<div id="texto_generico">
+							<p>Para representar variáveis quantitativas contínuas, que é o caso da variável "altura", não se pode usar um simples gráfico de barras, pois os valores do eixo horizontal são intervalos numéricos (aqui chamados de "classes de frequências") e não apenas números. Por isso, serão usados histogramas. Observe o histograma no quadro ao lado.
+							</p>
+							<p>Os valores máximo e mínimo de altura dos alunos da sala serão os extremos do eixo horizontal do histograma. No eixo vertical, será representada a frequência relativa de cada classe.
+							</p>
 						</div>
-						<div id="parte3_q5"></div>
 
+						
+						<div id="parte1_q1"></div>
+						<div id="parte1_q2"></div>
+						<div id="parte1_q3"></div>
+						<div id="parte1_q4"></div>
+						<div id="parte1_q5"></div>
+						
+						<!-- Aqui vão ser colocadas as questões, via JavaScript.-->
+						
 						<a href="javascript:" id="corrigir_tudo">Corrigir todas as questões</a>
 						
 						<a id="link_continuar">
@@ -140,7 +153,6 @@
 						</a>
 						<div class="limpador"></div>
 					</div>
-				
 				</div>
 			</div>
 			<br class="limpador" />
@@ -150,20 +162,26 @@
 		</div>
 		<div id="applet">
 			<div id="borda_applet" class="altura_applet_4 borda sem_fundo">
-				<applet name="ggbApplet" code="geogebra.GeoGebraApplet" codebase="./" archive="jars/geogebra.jar" width="519" height="380" MAYSCRIPT>
-					<param name="filename" value="applets/chart.ggb" />
-					<param name="framePossible" value="false" />
-					<param name="showResetIcon" value="false" />
-					<param name="enableRightClick" value="false" />
-					<param name="showMenuBar" value="false" />
-					<param name="showToolBar" value="false" />
-					<param name="showToolBarHelp" value="false" />
-					<param name="showAlgebraInput" value="false" />
-					<param name="scriptable" value="true" />                                            
-					<param name="language" value="en"/>
-					<param name="enableShiftDragZoom" value="false" />		
-					<param name="enableChooserPopups" value="false" />										
-				</applet>		
+				<div id="ggbApplet"></div>
+					<script>
+					 var ggbApp = new GGBApplet({
+    					 "appName": "classic",
+   						 "width": 519, "height": 380,
+						 "filename": "applets/chart.ggb",
+						 "showResetIcon": "false",
+						 "enableRightClick": "false",
+						 "showMenuBar": "false",
+						 "showToolBar": "false",
+						 "showToolBarHelp": "false",
+						 "showAlgebraInput": "false",
+						 "enableLabelDrags": "false",
+						 "enableShiftDragZoom": "false",
+						 "useBrowserForJS": "true"
+					}, true);
+					window.addEventListener("load", function() {
+					ggbApp.inject('ggbApplet');
+					});
+					</script>
 				
 				<div class="canto sup_esq"></div>
 				<div class="canto sup_dir"></div>
@@ -175,13 +193,14 @@
 			<div id="associado"></div>
 
 			<div id="comandos">
-				<input type="button" class="botao botao_grande" value="Alterar gráfico" id="muda_grafico"/>		
+	
 			</div>
 		</div>
 				
-		<div id="texto_generico">
-		</div>				
+			<div id="texto_generico">
+			</div>				
 		</div>
+		
 		<div id="ferramentas">
 			<a href="javascript:;" onclick="return false;" id="link_notas"><span class="escondido">referencias</span></a>
 			<a href="javascript:;" onclick="return false;" id="link_bloco"><span class="escondido">bloco de notas</span></a>

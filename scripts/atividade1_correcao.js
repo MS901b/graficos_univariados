@@ -8,8 +8,8 @@ var nCorretos=0;
 var vetorSexo = new Array();
 var vetorCalcado = new Array();
 var vetorAltura = new Array();
-var iniciou_sl = false;
-var iniciou_tela = false;
+var iniciou_sl = true;
+var iniciou_tela = true;
 
 
 Event.observe(document, 'flash:SalvaLocal', function(ev) {
@@ -140,7 +140,7 @@ function cb_salvar_tabela(){
 
 function salvaTabela() {
 	var array_dados = criaArrayDados();			
-	var oldTabela = getRespSoft("tabela_principal", "estat-dados");					
+	var oldTabela = getRespSoft("tabela_principal", "estat-dados") || ""
 	
 	// Verifica se há dados a serem gravados
 	if (array_dados.length  != 0) {

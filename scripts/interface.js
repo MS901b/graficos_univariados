@@ -5,9 +5,6 @@ var Calculadora;
 var nomeSoft;
 var Partes;
 
-var ultimaLista = null;
-var ultimaAltura = null;
-
 var Referencias = new Array();
 var NoValorInicial = false;
 
@@ -23,27 +20,18 @@ var Letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q
 
 Event.observe(window, 'load', function()
 {
-	gerenciaParte()
+	gerencia_partes()
 	// trata do css (grande e normal) gerenciado por cookie
 	css = readCookie('css');
-	if (css == 'grande')
-	{
-		for(i=0; (a = document.getElementsByTagName("link")[i]); i++) 
-		{
-			if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) 
-			{
-				a.disabled = true;
-				if(a.getAttribute("title") == 'grande') a.disabled = false;
-			}
-		}
-		$('link_acessibilidade').href = 'javascript:setActiveStyleSheet("normal");';
-	}
-	else
-	{
-		$('link_acessibilidade').href = 'javascript:setActiveStyleSheet("grande");';
-	}
+    for(i=0; (a = document.getElementsByTagName("link")[i]); i++)
+    {
+        if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title"))
+        {
+            a.disabled = true;
+            if(a.getAttribute("title") == 'grande') a.disabled = false;
+        }
+    }
 });
-
 
 Event.observe(document, 'flash:SalvaLocal', function(ev)
 {
@@ -62,18 +50,15 @@ document.observe("dom:loaded", function()
 		return;
 	}
 	
-	var Questao = null, Item = null, ajuda = null,
-		PartesAnteriores = 0;
+	var Questao = null, Item = null, ajuda = null, PartesAnteriores = 0;	
 	
 	for(var a = 0; a < PosicaoAtual.Parte; a++)
 		PartesAnteriores+= $H(Questoes[a]).keys().length;
-	
 	
 	if (Questoes != null)
 		QuestoesDados = $H(Questoes[PosicaoAtual.Parte]);
 	else
 		QuestoesDados = [];
-	
 	
 	QuestoesDados.each( function (dados)
 	{
@@ -93,45 +78,20 @@ document.observe("dom:loaded", function()
 		var Iniciais = Conteudo.get('itens');
 		
 		var iItem = 0;
-		var Contador = 0;
-		var ContadorEfetivo = 0;
 		var iInicial = 0;
-		var simples = false;
-		if (QuestaoDados.length==1)
-		{
-			teste = $H(QuestaoDados[Contador]);
-			if (teste.get('tamanho') != 'grande')
-				simples = true;
-		}
+		var Contador = 0;
+		
 		
 		while (Contador < QuestaoDados.length)
 		{
 			ItemDados = $H(QuestaoDados[Contador]);
-			
-			var idItem = 'Item_'+(iQuestao+1)+'_'+((iItem)+1);
-			var classeItem = ''; 
-			
-			if (ItemDados.get('tipo') == 'valor_inicial')
-			{
-				idItem += 'a';
-				classeItem += 'cor_valor_dentro '; 
-			}
-			
-			ContadorEfetivo++;
-			if (ItemDados.get('tamanho') == 'grande')
-			{
-				ContadorEfetivo = 2;
-				classeItem += 'grande ';
-			}
-			
-			Item = new Element('div', {id: idItem, className: 'questao_item '+classeItem});
-			
-			
+			Item = new Element('div', {className: 'questao_item'});
+
 			if (ItemDados.get('tipo') != 'valor_inicial')
 			{
 				divCont = new Element('div', {className: 'colchao'});
 				
-				if(ItemDados.get('esperando') == true)
+				if(ItemDados.get('esperando'))
 				{
 					if (Iniciais[iInicial].Selecao)
 					{
@@ -150,8 +110,7 @@ document.observe("dom:loaded", function()
 					}
 					
 				}
-				
-				
+					
 				divCont.insert(new Element('span', {className: 'icone_questao'}).update(Letras[iItem]));
 				if (ItemDados.get('enunciado'))
 				{
@@ -191,6 +150,8 @@ document.observe("dom:loaded", function()
 				divCont.insert(new Element('br', {className: 'limpador'}));
 				Item.insert(divCont);
 				
+				
+				
 				if(ItemDados.get('esperando'))
 				{
 					divCont.addClassName('esperando');
@@ -198,34 +159,32 @@ document.observe("dom:loaded", function()
 			}
 			
 			
-			
 			switch(ItemDados.get('tipo'))
 			{
-			
+				
+				
 				case 'valor_inicial':
-					
 					var dateObject = new Date();
 					var nome =
 						dateObject.getFullYear() + '' +
 						dateObject.getMonth() + '' +
 						dateObject.getDate() + '' +
 						dateObject.getTime();
-					
+					  
 					var Caixa = new Element('div', {className: 'item sem_titulo'});
 					Caixa.insert(new Element('a', {name: nome, className: 'ancora'}));
 					Caixa.insert(new Element('p').insert(ItemDados.get('enunciado')));
 					Caixa.insert(new Element('br', {className: 'limpador'}));
-
+					
 					
 					var Dentro = new Element('div', {className: 'conteudo'});
 					var itens = new Array();
 					
 					for (var a = 0; a < ItemDados.get('dados').length; a++)
 					{
-						//alert(ItemDados.get('dados')[a].length);
 						for (var b = 0; b < ItemDados.get('dados')[a].length; b++)
 						{
-							var input = new Element('input', {type: 'text', className: 'input', id: ItemDados.get('dados')[a][b].id});
+							var input = new Element('input', {className: 'input', id: ItemDados.get('dados')[a][b].id});
 							itens.push(input);
 							var label = new Element('div', {className: 'label'}).update(ItemDados.get('dados')[a][b].label);
 							var divisinha = new Element('div', {className: 'a_esquerda caixas'});
@@ -239,13 +198,12 @@ document.observe("dom:loaded", function()
 							Dentro.insert(new Element('div', {className: 'limpador entre_linhas'}));
 					}
 					
-					//Caixa.insert(new Element('input').insert());
 					Caixa.insert(Dentro);
 					Caixa.insert(new Element('br', {className: 'limpador'}));
 					var setaValor = new Element('a', {onclick: 'return false;', href: 'javascript:;'}).insert('OK');
 					Caixa.insert(setaValor);
 					Caixa.insert(new Element('p').insert(new Element('em').insert(ItemDados.get('usado'))));
-					Caixa.insert(new Element('br', {className: 'limpador'}));
+					Caixa.insert(new Element('div', {className: 'limpador'}));
 					
 					var divCont = new Element('div', {className: 'valor_dentro'}).insert(Caixa);
 					
@@ -261,16 +219,15 @@ document.observe("dom:loaded", function()
 				break;
 				
 				case 'drag':
+					var tmp_drag;
 					var verdadeiro = new Element('input', {className: 'some', type: 'checkbox', id: MontaID(PosicaoAtual.Parte+1, iQuestao+1+PartesAnteriores, iItem+1), name: MontaID(PosicaoAtual.Parte+1, iQuestao+1+PartesAnteriores, iItem+1)});
-					divCont.insert(new Element('div', {className: 'input_texto'}).insert(new Element('div').insert(verdadeiro)));
-					var html = $(ItemDados.get('html')).childElements();
-					for (a=0; a<html.length; a++)
-					{
-						divCont.insert(html[a]);
-					}
+					var dados_drag = $(ItemDados.get('html')).removeClassName('escondido');
+					divCont.insert(new Element('div', {className: 'input_texto'}).insert(new Element('div').insert(verdadeiro).insert(tmp = new Element('div'))));
+					tmp.replace(dados_drag);
+					
 					divCont.insert(new Element('br', {className: 'limpador'}));
 					colocaAjuda(ItemDados, divCont);
-					QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'drag')
+					QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'drag')
 				break;
 				
 				case 'input':
@@ -279,7 +236,7 @@ document.observe("dom:loaded", function()
 					var largura = 306;
 					if (ItemDados.get('antes'))
 					{
-						if (ItemDados.get('antes').length <=4 )
+						if (ItemDados.get('antes').length <=5 )
 						{
 							antes = new Element('span', {className:'a_esquerda margem_questao antes_depois primeiro_modulo'}).insert(ItemDados.get('antes'));
 							largura = largura - 40;
@@ -302,9 +259,9 @@ document.observe("dom:loaded", function()
 						if (ItemDados.get('depois').length > 8 )						
 							largura = largura - 130;
 						else if (ItemDados.get('depois').length <= 4 )						
-							largura = largura - 70;
-						else if (ItemDados.get('depois').length <= 8 )						
 							largura = largura - 40;
+						else if (ItemDados.get('depois').length <= 8 )						
+							largura = largura - 70;
 							
 						
 					}
@@ -341,24 +298,26 @@ document.observe("dom:loaded", function()
 						input.setStyle({marginLeft: '0px'});
 					if (depois != '')
 						input.setStyle({marginRight: '5px'});
-					
+						
 					colocaAjuda(ItemDados, divCont);
+						
 					if(ItemDados.get('esperando'))
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'),[input], ItemDados.get('msgErro'), null,null,true)
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'),[input], ItemDados.get('msgErro'), null,null,true)
 					else
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'),[input], ItemDados.get('msgErro'))
-					
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'),[input], ItemDados.get('msgErro'))
 				break;
 				
 				case 'instrucao':
 					var verdadeiro = new Element('input', {className: 'some', type: 'checkbox', id: MontaID(PosicaoAtual.Parte+1, iQuestao+1+PartesAnteriores, iItem+1), name: MontaID(PosicaoAtual.Parte+1, iQuestao+1+PartesAnteriores, iItem+1)});
 					divCont.insert(new Element('div', {className: 'input_texto'}).insert(new Element('div').insert(verdadeiro)));
+					
 					colocaAjuda(ItemDados, divCont);
 					if(ItemDados.get('esperando'))
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio', true)
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio', true)
 					else
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio')
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio')
 				break;
+				
 				
 				case 'generico':
 					var verdadeiro = new Element('input', {className: 'some', type: 'checkbox', id: MontaID(PosicaoAtual.Parte+1, iQuestao+1+PartesAnteriores, iItem+1), name: MontaID(PosicaoAtual.Parte+1, iQuestao+1+PartesAnteriores, iItem+1)});
@@ -366,10 +325,11 @@ document.observe("dom:loaded", function()
 					
 					colocaAjuda(ItemDados, divCont);
 					if(ItemDados.get('esperando'))
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio', true)
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio', true)
 					else
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio')
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'),[verdadeiro], ItemDados.get('msgErro'), '', 'radio')
 				break;
+				
 				
 				case 'multipla_escolha':
 					var dadosArray = ItemDados.get('dados');
@@ -382,9 +342,9 @@ document.observe("dom:loaded", function()
 					divCont.insert(mp.divCont);
 					colocaAjuda(ItemDados, divCont);
 					if(ItemDados.get('esperando'))
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), mp.itens, ItemDados.get('msgErro'), divCont, 'radio', true);
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), mp.itens, ItemDados.get('msgErro'), divCont, 'radio', true);
 					else
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), mp.itens, ItemDados.get('msgErro'), divCont, 'radio');
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), mp.itens, ItemDados.get('msgErro'), divCont, 'radio');
 				break;
 				
 				case 'multiplo_input':
@@ -393,17 +353,18 @@ document.observe("dom:loaded", function()
 					
 					divCont.insert(multiplo.divCampos);
 					divCont.insert(new Element('br',{className: 'limpador'}));
+					
 					colocaAjuda(ItemDados, divCont);
 					if (!dependente)
 						if(ItemDados.get('esperando'))
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, null, true);
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, null, true);
 						else
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont);
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont);
 					else
 						if(ItemDados.get('esperando'))
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo', true);
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo', true);
 						else
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo');
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo');
 				break;
 				
 				
@@ -412,23 +373,26 @@ document.observe("dom:loaded", function()
 					
 					divCont.insert(multiplo.divCampos);
 					divCont.insert(new Element('br',{className: 'limpador'}));
-					colocaAjuda(ItemDados, divCont);					
+					
+					colocaAjuda(ItemDados, divCont);
 					if (!dependente)
 						if(ItemDados.get('esperando'))
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, null, true);
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, null, true);
 						else
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont);
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont);
 					else
 						if(ItemDados.get('esperando'))
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo', true);
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo', true);
 						else
-							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo');
+							QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), multiplo.itens, ItemDados.get('msgErro'), divCont, 'multiplo');
 				break;
 				
+				
 				case 'matriz':
+				
 					var antes = '';
 					var depois = '';
-					tem_antes =  false;
+					var tem_antes = false;
 					if (ItemDados.get('antes'))
 					{
 						if (ItemDados.get('antes').length <=4 )
@@ -450,10 +414,10 @@ document.observe("dom:loaded", function()
 							tem_antes =  true;
 						}
 					}
-					
+				
 					if (ItemDados.get('depois'))
 						depois = new Element('span', {className:'a_esquerda antes_depois depois'}).insert(ItemDados.get('depois'));
-					
+				
 					for (var a = 0; a < ItemDados.get('dados').length; a++)
 						for (var b = 0; b < ItemDados.get('dados')[a].length; b++)
 							ItemDados.get('dados')[a][b].id = MontaID(PosicaoAtual.Parte+1, iQuestao+1+PartesAnteriores, iItem+1, [a+1,b+1].join(''));
@@ -465,7 +429,9 @@ document.observe("dom:loaded", function()
 						antes.setStyle({marginTop: (matriz.linhas*11)+'px', width: largura+'px'});
 						matriz.divCont.removeClassName('margem_questao');
 						matriz.divCont.setStyle({marginLeft:0});
-					}
+					}	
+					
+						
 					divCont.insert(matriz.divCont);
 					
 					if (depois != '')
@@ -474,12 +440,12 @@ document.observe("dom:loaded", function()
 						depois.setStyle({marginTop: (matriz.linhas*11)+'px', marginLeft: '10px'});
 					}
 					
-					divCont.insert(new Element('br',{className: 'limpador'}));
 					colocaAjuda(ItemDados, divCont);
+					divCont.insert(new Element('br',{className: 'limpador'}));
 					if(ItemDados.get('esperando'))
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), matriz.itens, ItemDados.get('msgErro'), divCont, null, true);
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), matriz.itens, ItemDados.get('msgErro'), divCont, null, true);
 					else
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), matriz.itens, ItemDados.get('msgErro'), divCont);
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), matriz.itens, ItemDados.get('msgErro'), divCont);
 				break;
 					
 				case 'tabela':
@@ -492,9 +458,9 @@ document.observe("dom:loaded", function()
 					divCont.insert(new Element('br',{className: 'limpador'}));
 					colocaAjuda(ItemDados, divCont);
 					if(ItemDados.get('esperando'))
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont, null, true);
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont, null, true);
 					else
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont);
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont);
 				break;
 				
 				case 'tabela_adjacencia':
@@ -507,11 +473,12 @@ document.observe("dom:loaded", function()
 					divCont.insert(new Element('br',{className: 'limpador'}));
 					colocaAjuda(ItemDados, divCont);
 					if(ItemDados.get('esperando'))
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont, null, true);
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont, null, true);
 					else
-						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont);
+						QuestaoDados[iItem].Corrigir = new Corrigir(ItemDados.get('associado'), ItemDados.get('selecionada'), ItemDados.get('corrigir'), tabela.itens, ItemDados.get('msgErro'), divCont);
 				break;
 			}
+
 			
 			if(QuestaoDados[iItem])
 			{
@@ -519,19 +486,25 @@ document.observe("dom:loaded", function()
 					QuestaoDados[iItem].Corrigir.posicao = {Parte: PosicaoAtual.Parte, Questao: dados.key, Item:iItem};
 			}
 			
-			
-			Item.insert(new Element('div', {className: 'limpador'}));
 			Item.insert(new Element('div', {className: 'canto sup_esq'})); Item.insert(new Element('div', {className: 'canto sup_dir'}));
 			Item.insert(new Element('div', {className: 'canto inf_esq'})); Item.insert(new Element('div', {className: 'canto inf_dir'}));
-			
-			
-			if(ItemDados.get('tamanho') == 'grande')
-				Questao.insert(new Element('div', {className: 'limpador'}));
-				
 			Questao.insert(Item);
 			
-			if(ContadorEfetivo%2 == 0)
-				Questao.insert(new Element('div', {className: 'limpador'}));
+			//Procura por inputs de texto caso tenha sido especificado para tal, para colocar o combobox de caracteres especiais;
+			var caracteres;
+			if(caracteres = ItemDados.get('caracteres_especiais'))
+			{
+				var inputs_especiais = divCont.select('input[type="text"]');
+				if(!inputs_especiais.length)
+					alerta('Questão especificada para por select de caracteres especiais, mas não foi encontrados inputs do tipo text.');
+				
+				for(var a = 0; a < inputs_especiais.length; a++)
+				{
+					inputs_especiais[a].addClassName('caracteres_especiais');
+					if(caracteres !== true)
+						inputs_especiais[a].writeAttribute({quais: caracteres});
+				}
+			}
 			
 			iItem++;
 			Contador++;
@@ -539,31 +512,30 @@ document.observe("dom:loaded", function()
 		
 		QuestaoCont.insert(new Element('h2').insert('Questão '+(iQuestao+1+PartesAnteriores)));
 		if(EnunciadoGeral)
-			QuestaoCont.insert(new Element('div', {className: 'enunciado_geral'}).update(new Element('p').insert(EnunciadoGeral)));
-		
+			QuestaoCont.insert(new Element('div', {className: 'enunciado_geral'}).update(EnunciadoGeral));
 		QuestaoCont.insert(Questao);
-		QuestaoCont.insert(new Element('div', {className: 'limpador'}));
-		
-		if (simples)
-			QuestaoCont.addClassName('questao_container2');
-		else
-			QuestaoCont.addClassName('questao_container');
+		QuestaoCont.addClassName('questao_container');
 		iQuestao++;
 	});
 	
+	
 	Event.observe('link_bloco', 'click', function(){
-		fechaFerramentas();
-		BlocoNotas.abre();
+		var abre = BlocoNotas && BlocoNotas.divCont && !BlocoNotas.divCont.visible();
+        if (BlocoNotas) fechaFerramentas();
+		if(abre)
+			BlocoNotas.abre();
 	});
 	
 	PopupReferencias = new Notas();
-	Event.observe('link_notas', 'click', function(){
+	Event.observe('link_notas', 'click', function(){	
+		var abre = !PopupReferencias.popup.divCont.visible();
 		fechaFerramentas();
-		PopupReferencias.abre();
+		if(abre)
+			PopupReferencias.abre();
 	});
 	
-	
 	interface_document_loaded = true;
+	
 	
 	gerencia_corrige_tudo();
 	gerencia_partes();
@@ -571,15 +543,12 @@ document.observe("dom:loaded", function()
 	document.fire('dom:afterLoaded');
 });
 
-
-
 function colocaAjuda(ItemDados, divCont)
 {
 	if(ItemDados.get('msgAjuda'))
 	{
 		ajuda = new Element('a', {className: 'ajuda geral'});
 		var popup = new PopupClick(ajuda, ItemDados.get('msgAjuda'), ['seta_direita','central'], 10);
-		popup.tempo = 10;
 		divCont.insert(ajuda);
 		
 		Event.observe(ajuda, 'focus', function(ev){Event.element(ev).addClassName('ativo');});
@@ -588,8 +557,6 @@ function colocaAjuda(ItemDados, divCont)
 		ajuda.hide();
 	}
 }
-
-
 
 function alerta(texto)
 {
@@ -646,18 +613,26 @@ var ValorInicial = Class.create({
 		this.p = new Element('p').insert('Aguardando definição de ');
 		this.a = new Element('a', {href: '#'}).insert('valor acima.');
 		
-		if (this.pai)
-			this.a.observe('click', function(ev){ev.stop(); this.seleciona(); this.pai.scrollTo()}.bind(this));
-		else
-			this.a.observe('click', function(ev){ev.stop(); $('valor_inicial').scrollTo();});
+		var bind;
+		if (this.pai)	bind = this.pai.divCont;
+		else			bind = $('valor_inicial');
 		
+		Event.observe(this.a, 'click', function(ev)
+		{
+			ev.stop();
+			this.scrollTo();
+		}.bind(bind));
+
 		this.p.insert(this.a);
 		
 		this.depois = new Element('p', {className: 'depois'}).insert('');
 		var div = new Element('div', {className: 'msg_valor_inicial'}).insert(this.p);
 		div.insert(this.depois);
 		this.depois.hide();		
-		this.divCont.insert(div);
+		this.divCont.insert(div);	
+
+		if(this.pai)
+			Event.observe(this.a, 'click',  this.seleciona.bind(this));
 
 	},
 	seleciona: function ()
@@ -700,11 +675,6 @@ var Selecao = Class.create({
 			this.li.addClassName('selecionada');
 			this.selecionada = true;
 			
-			altura = this.li.cumulativeOffset().top;
-			$('ir_applet').setStyle({top: (altura-90)+'px'});
-			$('ir_applet').show();
-			$('voltar_questao').show();
-			
 			atividade = PosicaoAtual.Atividade;
 			PosicaoAtual = this.posicao;
 			PosicaoAtual.Atividade = atividade;
@@ -714,7 +684,6 @@ var Selecao = Class.create({
 			}
 			catch (err) {}
 		}
-
 	},
 	desseleciona: function ()
 	{		
@@ -725,12 +694,10 @@ var Selecao = Class.create({
 	{
 		this.setar();
 		this.divCont.addClassName('desabilitada');
-		this.divCont.up().addClassName('desabilitada');
 		this.link.update('Alterar valor');
-		
 		for (a=0; a<this.inputs.length; a++)
 		{
-			this.inputs[a].writeAttribute({disabled: 'disabled'});
+			this.inputs[a].trava();
 		}
 		
 		Event.stopObserving(this.link, 'click');
@@ -768,12 +735,11 @@ var Selecao = Class.create({
 		{
 			este.tirar();
 			este.divCont.removeClassName('desabilitada');
-			este.divCont.up().removeClassName('desabilitada');
 			este.link.update('OK');
 			
 			for (a=0; a<este.inputs.length; a++)
 			{
-				este.inputs[a].removeAttribute('disabled');
+				este.inputs[a].destrava();
 			}
 			
 			Event.stopObserving(este.link, 'click');
@@ -782,16 +748,22 @@ var Selecao = Class.create({
 	}
 });
 
+
+
 var Corrigir = Class.create({
 	a: null, span: null, li: null, divCont: null, inputs:null, 
 	corrigir: null, radio: null, multiplo: null, MsgErro: null, correto: null, selecionou: null,
 	posicao: null, jaAbriu: false, travado: null, selecionada: null, associado:null, drag: null,
-	initialize: function (selecionou, corrigir, ids, msg, divCont, tipo, travado)
+	initialize: function (associado, selecionou, corrigir, ids, msg, divCont, tipo, travado)
 	{
 	
 		this.corrigir = corrigir;
 		this.selecionou = selecionou;
 		this.travado = travado == true;
+		this.associado = associado;
+		
+		if(msg)
+			this.MsgErro = new MsgErro(msg);
 		
 		this.radio = false;
 		this.multiplo = false;
@@ -807,10 +779,10 @@ var Corrigir = Class.create({
 			if(tipo == 'drag')
 				this.drag = true;
 		}
+
 		
-		
-		this.a = new Element('a', {href: '#', className: 'feedback'}).update('Corrigir item');
-		
+		this.a = new Element('a', {href: 'javascript:;', onclick: 'return false;', className: 'feedback'}).update('Corrigir item');
+		this.span = new Element('span', {className: 'feedback'}).update(this.a);
 		
 		this.inputs = new Array();
 		
@@ -840,50 +812,83 @@ var Corrigir = Class.create({
 			this.divCont = divCont;
 		else
 			this.divCont = this.inputs[0].up().up().up();
-
-		
-		this.divCont.insert(this.calcoPre = new Element('div', {rel: 'pre_calco', className: 'limpador'}));
-		this.divCont.insert(this.a);
-		this.divCont.insert(this.calcoPos = new Element('div', {rel: 'pos_calco', className: 'limpador'}));
-		
+			
+		this.divCont.insert(this.span);
+		this.divCont.insert(new Element('div', {className: 'limpador'}).update('&nbsp;'));
 		this.li = this.divCont.up();
 		if(msg)
-		{
-			this.MsgErro = new MsgErro(msg, this.ajustaPosCalco.bind(this));
 			this.li.insert(this.MsgErro.divCont);
-		}
 		
 		Event.observe(this.a, 'click', this.disparaCorrigir.bind(this));
 		Event.observe(this.a, 'click', this.seleciona.bind(this));
 		Event.observe(this.li, 'click', this.seleciona.bind(this));
 		
-		Event.observe(document, 'dom:afterLoaded', function(ev){
-			this.vizinho = this.li.next('div');
-			
-			if(!this.vizinho || !this.vizinho.hasClassName('questao_item'))
-				this.vizinho = this.li.previous('div');
-				
-			if(!this.vizinho || !this.vizinho.hasClassName('questao_item'))
-				this.vizinho = false;
-				
-			this.ajustaPreCalco(true);
-		}.bind(this));
+		if(travado)
+		{
+			this.divCont.select('input').each(function(el){el.trava();});
+		}
 	},
 	seleciona: function ()
 	{
 		if (!NoValorInicial && !this.selecionada)
 		{
-			if(PegaQuestao(PosicaoAtual))
-				PegaQuestao(PosicaoAtual).desseleciona();
+			
+			if (this.associado)
+			{
+				$('borda_applet').addClassName('borda_associado');
+				$('applet').addClassName('associado');
 				
+				$('associado').setStyle({
+					top: (this.divCont.cumulativeOffset().top + +50) +'px', 
+					left: ($('applet').cumulativeOffset().left -14) +'px'
+				});
+				$('associado').show();
+				
+				$('associacao').setStyle({
+					bottom: '10px', 
+					left: '10px'
+				});
+				$('associacao').show();
+				
+				var iLen = String(this.posicao.Questao).length;
+				if (String(this.posicao.Questao).substr(iLen-3, 1) == 'q')
+					var qual_questao = String(this.posicao.Questao).substr(iLen-2, 2);
+				else
+					var qual_questao = String(this.posicao.Questao).substr(iLen-1, 1);
+				
+				var qual_item = new Element('span', {className: 'icone_questao'});
+				qual_item.update(Letras[this.posicao.Item]);
+				
+				var texto = new Element('span', {className:'a_esquerda'}).update('Associado à Questão '+qual_questao);
+				
+				$('associacao').update(texto);
+				$('associacao').insert(qual_item);
+				
+				
+				paraNavegacao = true;
+			}
+			else
+			{
+				$('borda_applet').removeClassName('borda_associado');
+				$('applet').removeClassName('associado');
+				$('associado').hide();
+				$('associacao').hide();
+				paraNavegacao = false;
+			}
+			
+			this.selecionada = true;
+			
 			if(PegaInicial(PosicaoAtual))
 				PegaInicial(PosicaoAtual).desseleciona();
+				
+			if(PegaQuestao(PosicaoAtual))
+				PegaQuestao(PosicaoAtual).desseleciona();
 			
 			if(this.li.viewportOffset().top+this.li.getHeight()+60 > document.viewport.getHeight())
 				Effect.ScrollTo(this.li, {duration: 0.4, offset: -(document.viewport.getHeight()-this.li.getHeight()-60)});
 			
+			
 			this.li.addClassName('selecionada');
-			this.selecionada = true;
 			try
 			{
 				this.inputs[0].focus();
@@ -893,18 +898,10 @@ var Corrigir = Class.create({
 			if(this.correto == false && !this.jaAbriu)
 			{
 				this.MsgErro.abre();
-				//this.li.setStyle({height: this.li.getHeight()+'px'});
 				this.jaAbriu = true;
 			}
 			
-			if($('ir_applet'))
-			{
-				altura = this.li.cumulativeOffset().top;
-				$('ir_applet').setStyle({top: (altura-90)+'px'});
-				$('ir_applet').show();
-				$('voltar_questao').show();
-			}
-			
+			//alert(this.posicao.Questao);
 			atividade = PosicaoAtual.Atividade;
 			PosicaoAtual = this.posicao;
 			PosicaoAtual.Atividade = atividade;
@@ -914,8 +911,9 @@ var Corrigir = Class.create({
 			if (ajuda[0])
 				ajuda[0].show();
 			
+			
 			if (this.selecionou)
-				this.selecionou();
+				this.selecionou(); 
 		}
 		else
 			NoValorInicial = false;
@@ -933,9 +931,6 @@ var Corrigir = Class.create({
 	{
 		var correcao = this.corrigir(this.valores());
 		var tudo_certo = true;
-		
-		if(evento)
-			evento.stop();
 		
 		if (!this.travado)
 		{
@@ -960,40 +955,33 @@ var Corrigir = Class.create({
 			
 			if(tudo_certo)
 			{
-				this.a.setStyle({backgroundImage: 'url(img_layout/certo.gif)'});
-				if(evento != false)
+				this.span.setStyle({backgroundImage: 'url(img_layout/certo.gif)'});
+				if(evento != false && this.posicao.Item < $H(Questoes[this.posicao.Parte]).get(this.posicao.Questao).itens.length-1)
 				{
-					if(this.posicao.Item < $H(Questoes[this.posicao.Parte]).get(this.posicao.Questao).itens.length-1)
+					ProximoItem = PegaQuestao({Parte: this.posicao.Parte, Questao: this.posicao.Questao, Item: this.posicao.Item+1});
+					if (ProximoItem)
 					{
-						ProximoItem = PegaQuestao({Parte: this.posicao.Parte, Questao: this.posicao.Questao, Item: this.posicao.Item+1});
-						if (ProximoItem)
-						{
-							if(ProximoItem.correto == null)
-								window.setTimeout(function(){this.inputs[0].focus();}.bind(ProximoItem), 800);
-						}
+						if(ProximoItem.correto == null)
+							window.setTimeout(function(){this.inputs[0].focus();}.bind(ProximoItem), 800);
 					}
-					
-					if(this.MsgErro)
-						this.MsgErro.fecha();
+				}
+				if(this.MsgErro && evento != false)
+				{
+					this.MsgErro.fecha();
 				}
 			}
 			else
 			{
-				this.a.setStyle({backgroundImage: 'url(img_layout/errado.gif)'});
+				this.span.setStyle({backgroundImage: 'url(img_layout/errado.gif)'});
 				if(this.MsgErro && evento != false)
 				{
 					this.jaAbriu = true;
 					this.MsgErro.abre();
 				}
 			}
-			
+				
+			this.span.show();
 			this.correto = tudo_certo;
-			
-			
-			// if (!tudo_certo)
-				// this.li.setStyle({height: ''});
-			
-			// this.li.setStyle({height: this.li.getHeight()+'px'});
 			
 			if (evento != false)
 			{
@@ -1007,8 +995,9 @@ var Corrigir = Class.create({
 	{
 		var correcao = this.corrigir(this.valores());
 		var tudo_certo = true;
+
 		
-		if(correcao)
+		if (correcao)
 		{
 			if (!this.travado)
 			{
@@ -1030,7 +1019,6 @@ var Corrigir = Class.create({
 		{
 			tudo_certo = false;
 		}
-		
 		return tudo_certo;
 	},
 	valores: function()
@@ -1050,7 +1038,7 @@ var Corrigir = Class.create({
 	},
 	certo: function (i)
 	{
-		if(this.multiplo == true)
+		if(this.multiplo)
 		{
 			this.inputs[i].up().up().removeClassName('incorreto');
 			this.inputs[i].up().up().addClassName('correto');
@@ -1064,7 +1052,7 @@ var Corrigir = Class.create({
 	},
 	errado: function (i)
 	{
-		if(this.multiplo == true)
+		if(this.multiplo)
 		{
 			this.inputs[i].up().up().removeClassName('correto');
 			this.inputs[i].up().up().addClassName('incorreto');
@@ -1077,15 +1065,7 @@ var Corrigir = Class.create({
 	},
 	nada: function (ev)
 	{
-		this.a.setStyle({backgroundImage: 'none'});
-		if(this.radio)
-		{
-			this.inputs.each(function(item){
-				item.up().removeClassName('correto');
-				item.up().removeClassName('incorreto');
-			}.bind(this));
-		}
-		else if (this.multiplo)
+		if (this.multiplo)
 		{
 			this.inputs.each(function(item){
 				item.up().up().removeClassName('correto');
@@ -1093,13 +1073,15 @@ var Corrigir = Class.create({
 			}.bind(this));
 		}
 		else
-		{
+		{			
 			this.inputs.each(function(item){
 				item.up().removeClassName('correto');
 				item.up().removeClassName('incorreto');
 			}.bind(this));
+			
 		}
 		this.correto = null;
+		this.span.setStyle({backgroundImage: 'none'});
 	},
 	scrollTo: function (offset)
 	{
@@ -1108,52 +1090,17 @@ var Corrigir = Class.create({
 		Effect.ScrollTo(this.li,{offset: offset, duration: 0.8});
 		this.inputs[0].focus();
 		this.seleciona();
-	},
-	ajustaPreCalco: function(mesmo_vizinho_travado)
-	{
-		if(!this.vizinho)
-			return;
-		
-		var altura_vizinho = this.vizinho.getHeight();
-		var altura_minha = this.li.getHeight();
-		
-		if(!mesmo_vizinho_travado)
-			if((this.vizinho.down('.esperando') && !this.li.down('.esperando')) || (!this.vizinho.down('.esperando') && this.li.down('.esperando')))
-				return;
-		
-		if(altura_minha < altura_vizinho)
-		{
-			this.calcoPre.setStyle({height: (altura_vizinho-altura_minha)+'px'});
-		}
-	},
-	ajustaPosCalco: function()
-	{
-		if(!this.vizinho || !this.MsgErro)
-			return;
-		
-		var altura = 0;
-		var pq_errei = this.MsgErro.divCont.visible()?this.MsgErro.divCont.getHeight():0;;
-		var pq_errei_vizinho = this.vizinho.down('.pq_errei').visible()?this.vizinho.down('.pq_errei').getHeight():0;
-		
-		var altura = pq_errei_vizinho - pq_errei;
-		
-		this.calcoPos.setStyle({height: (altura > 0 ? altura : 0)+'px'});
-		this.vizinho.down('div[rel=pos_calco]').setStyle({height: (altura < 0 ? -altura : 0)+'px'});
 	}
 });
 
 var MsgErro = Class.create({
 	a: null, divCont: null, aberto: false,
-	initialize: function(msg, ajusta)
+	initialize: function(msg)
 	{
-		this.ajusta = ajusta;
-		
-		this.divCont = new Element('div', {className:'pq_errei'});
+		this.divCont = new Element('div', {className:'pq_errei', style: 'display: none;'});
 		this.divCont.insert(new Element('p').update(msg));
 		this.divCont.insert(this.a = new Element('a',{href: '#'}).update('Fechar'));
-		this.divCont.insert(new Element('div', {className: 'limpador'}));
-		this.divCont.hide();
-		
+		this.divCont.insert(new Element('div', {className: 'limpador'}).update('&nbsp;'));
 		Event.observe(this.a, 'click', this.fecha.bind(this));
 	},
 	abre: function()
@@ -1161,18 +1108,18 @@ var MsgErro = Class.create({
 		if(!this.aberto)
 		{
 			this.aberto = true;
-			Effect.BlindDown(this.divCont, {duration: 0.3, afterUpdate: this.ajusta, afterFinish: this.ajusta});
+			new Effect.BlindDown(this.divCont, {duration: 0.3});
 		}
 	},
 	fecha: function (ev)
 	{
-		if(ev) ev.stop();
-			
+		if(ev)
+			ev.stop();
 		this.a.up().up().select('a.feedback')[0].focus();
 		if(this.aberto)
 		{
-			new Effect.BlindUp(this.divCont, {duration: 0.3, afterUpdate: this.ajusta, afterFinish: this.ajusta});
 			this.aberto = false;
+			new Effect.BlindUp(this.divCont, {duration: 0.3});
 		}
 	}
 });
@@ -1182,7 +1129,7 @@ var MultiplaEscolha = Class.create({
 	initialize: function (opcoes)
 	{
 		this.itens = new Array();
-		var name = 'a'+Math.round(Math.random()*1000);
+		var name = 'a'+Math.round(Math.random()*10000);
 		this.ids = opcoes.keys();
 		var itens = opcoes.values();
 		
@@ -1472,7 +1419,7 @@ var TabelaAdjacencia = Class.create({
 								posicao_linha = [altura+(altura_atual/2)-5,'px'].join('');
 								
 								tamanho = Event.element(ev).getWidth();
-								esquerda = Event.element(ev).positionedOffset().left + 60;
+								esquerda = Event.element(ev).cumulativeOffset().left;
 								posicao_coluna = [esquerda-60+(tamanho/2)-3,'px'].join('');
 								$(pai.id+'seta_linha').setStyle({top: posicao_linha, display: 'block' });
 								$(pai.id+'seta_coluna').setStyle({left: posicao_coluna, display: 'block' });
@@ -1549,7 +1496,7 @@ var TabelaAdjacencia = Class.create({
 
 
 var Matriz = Class.create({
-	ids: new Array(), itens: new Array(), divCont: null,
+	ids: new Array(), itens: new Array(), divCont: null, linhas: null,
 	initialize: function (data, antes, fora)
 	{
 		this.itens = new Array();
@@ -1561,10 +1508,12 @@ var Matriz = Class.create({
 		this.divCont.insert(new Element('div', {className: 'supe_dir'}));
 		
 		var tmp, tr;
-		
+		this.linhas = 0;
+
 		for (var a = 0; a < data.length; a++)
 		{
 			tr = new Element("tr");
+			this.linhas += 1;
 			for (var b = 0; b < data[a].length; b++)
 			{
 				if($H(data[a][b]).get('id'))
@@ -1732,7 +1681,6 @@ var Multiplo = Class.create({
 
 
 
-
 var MultiploUnidade = Class.create({
 	ids: new Array(), itens: new Array(), divCampos: null, PE: null, input: new Array(),
 	initialize: function (data, questao)
@@ -1755,15 +1703,16 @@ var MultiploUnidade = Class.create({
 				var antes = '';
 				var depois = '';
 				
-				if (data[a][b].antes)	antes = new Element('span', {className:'a_esquerda antes_depois'}).insert(data[a][b].antes);
-				if (data[a][b].depois)	depois = new Element('span', {className:'a_esquerda antes_depois depois'}).insert(data[a][b].depois);
+				if (data[a][b].antes) antes = new Element('span', {className:'a_esquerda antes_depois'}).insert(data[a][b].antes);
+				if (data[a][b].depois) depois = new Element('span', {className:'a_esquerda antes_depois depois'}).insert(data[a][b].depois);
 				
 				var divisinha = new Element('div', {className: 'a_esquerda', style: 'position: relative;'});
+				
 				divisinha.insert(antes);
 				divisinha.insert(this.input[a][b]);
 				divisinha.insert(depois);
 				
-				var largura = 0;
+				var largura = '65';
 				if (data[a][b].antes)
 					conteudo_antes = data[a][b].antes.trim();
 				else
@@ -1771,17 +1720,12 @@ var MultiploUnidade = Class.create({
 
 				if (conteudo_antes.length <=4 && conteudo_antes.length > 0 )
 				{
-					largura = '65';
 					antes.setStyle({width: '40px'});
 				}
 				else if (conteudo_antes.length > 0)
 				{
 					largura = '40';
 					antes.setStyle({width: '65px'});
-				}
-				else
-				{
-					largura = '65';
 				}
 					
 					
@@ -1807,6 +1751,14 @@ var MultiploUnidade = Class.create({
 					Event.observe(this.input[a][b], 'blur', this.podeEsconder.bind(this));
 					Event.observe(this.input[a][b], 'focus', this.addFocus.bind(this));
 				}
+				
+				Event.observe(this.input[a][b], 'focus', function(ev){
+					ev.findElement('input').up().addClassName('multiplo_ativo');
+				});
+				
+				Event.observe(this.input[a][b], 'blur', function(ev){
+					ev.findElement('input').up().removeClassName('multiplo_ativo');
+				});
 				
 				this.divCampos.insert(divisinha);
 
@@ -1836,6 +1788,7 @@ var MultiploUnidade = Class.create({
 			this.down('a.ajuda').hide();
 	}
 });
+
 
 
 
@@ -1935,7 +1888,6 @@ function PegaQuestao (Posicao)
 	return null;
 }
 
-
 function PegaInicial (Posicao)
 {
 	if($H(Posicao).get('Questao'))
@@ -1964,13 +1916,17 @@ function removeEsperando(Item, msg)
 	else
 		filho.hide();
 	
-	QuestaoEsperando.a.removeAttribute('disabled');		
+	QuestaoEsperando.a.removeAttribute('disabled');	
 	QuestaoEsperando.divCont.removeClassName('esperando');
-	QuestaoEsperando.ajustaPreCalco();
-	for (a = 0; a<QuestaoEsperando.inputs.length; a++)
+	QuestaoEsperando.divCont.select('input').each(function(input)
 	{
-		QuestaoEsperando.inputs[a].removeAttribute('disabled');
-	}
+		input.destrava();
+	});
+	
+	QuestaoEsperando.divCont.select('select').each(function(input)
+	{
+		input.destrava();
+	});
 }
 
 function adicionaEsperando(Item)
@@ -1990,12 +1946,15 @@ function adicionaEsperando(Item)
 	filho.show();
 		
 	QuestaoEsperando.divCont.addClassName('esperando');
-	for (a = 0; a<QuestaoEsperando.inputs.length; a++)
+	QuestaoEsperando.divCont.select('input').each(function(input)
 	{
-		QuestaoEsperando.inputs[a].writeAttribute({disabled: 'disabled'});
-	}
+		input.trava();
+	});
+	QuestaoEsperando.divCont.select('select').each(function(input)
+	{
+		input.trava();
+	});
 }
-
 
 function fechaFerramentas()
 {
@@ -2012,7 +1971,7 @@ function corrige_tudo()
 	
 	
 	var QuestoesIds = $H(Questoes[PosicaoAtual.Parte]).keys();
-	
+
 	for(var a = 0; a < QuestoesIds.length; a++)
 	{
 		Itens = $H(Questoes[PosicaoAtual.Parte]).get(QuestoesIds[a]).itens;
@@ -2022,7 +1981,7 @@ function corrige_tudo()
 			{
 				if (corrigindo)
 				{
-					if (Itens[b].Corrigir.correto != true)
+					if (Itens[b].Corrigir.correto != true )
 						deu_erro = true;
 				}
 				else
@@ -2038,6 +1997,8 @@ function corrige_tudo()
 			}
 		}
 	}
+	
+	
 
 	if(deu_erro == true)
 	{
@@ -2053,7 +2014,7 @@ function corrige_tudo()
 				},
 				[{1:'Deseja ir para a primeira questão incorreta?'}]
 			)
-			CorrigeTudoPopup.abre();
+			CorrigeTudoPopup.abre(CorrigeTudoPopup.bind);
 			$('corrigir_tudo').addClassName('algo_errado');
 			Event.stopObserving($('corrigir_tudo'), 'click');
 			Event.observe($('corrigir_tudo'), 'click', corrige_tudo);
@@ -2173,45 +2134,3 @@ function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
 
-
-
-
-
-
-
-
-/*
-<!--[if !IE]>-->
-<object name="ggbApplet" 
-		classid="java:geogebra.GeoGebraApplet" 
-		type="application/x-java-applet"
-		archive="geogebras/Applet1/geogebra.jar"
-		height="340" width="450" >
-	<param name="codebase" value="./" />
-	<param name="filename" value="geogebras/Applet1/teste1.ggb" />
-	<param name="framePossible" value="false" />
-	<param name="showResetIcon" value="false" />
-	<param name="enableRightClick" value="false" />
-	<param name="showMenuBar" value="false" />
-	<param name="showToolBar" value="false" />
-	<param name="showToolBarHelp" value="false" />
-	<param name="showAlgebraInput" value="false" />
-<!--<![endif]-->
-<object name="ggbApplet" classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" 
-		archive="geogebras/Applet1/geogebra.jar"
-		height="340" width="450" > 
-	<param name="codebase" value="./" />
-	<param name="code" value="geogebra.GeoGebraApplet" />
-	<param name="filename" value="geogebras/Applet1/teste1.ggb" />
-	<param name="framePossible" value="false" />
-	<param name="showResetIcon" value="false" />
-	<param name="enableRightClick" value="false" />
-	<param name="showMenuBar" value="false" />
-	<param name="showToolBar" value="false" />
-	<param name="showToolBarHelp" value="false" />
-	<param name="showAlgebraInput" value="false" />
-</object> 
-<!--[if !IE]>-->
-</object>
-<!--<![endif]-->
-*/

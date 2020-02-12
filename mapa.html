@@ -7,10 +7,14 @@
 		<link rel="stylesheet" type="text/css" href="css/popup.css" media="screen, projection" />
 		<script type="text/javascript" src="scripts/AC_RunActiveContent.js"></script>
 		<script type="text/javascript" src="scripts/protoaculous.js"></script>
-		<script type="text/javascript" src="scripts/salvaLocal.js"></script>
+        <script type="text/javascript" src="scripts/salvaLocal.js"></script>
 		<script type="text/javascript" src="scripts/popup.js"></script>
+		<script type="text/javascript" src="scripts/mapinha.js"></script>
+
 		<title>Medidas do corpo: Gráficos Univariados</title>
 		<script type="text/javascript">
+
+     		var nomeSoft = 'estat';
 			var Perguntas = $H({
 				limpar: {
 					conteudo: '<p>Isso irá apagar todos os dados armazenados e as respostas já obtidas desta unidade.</p><p style="margin-top:10px;">Você tem certeza?</p>',
@@ -27,15 +31,8 @@
 			{
 				if (this.resultado == 'sim'){
 					$('Mapinha').ApagaTudo('estat');				
-					
-					var nomeSoft = 'estat';
-					
-					$('Mapinha').Salva(nomeSoft, 'atividade_1', 1);
-					$('Mapinha').Salva(nomeSoft, 'atividade_2', 0); 
-					$('Mapinha').Salva(nomeSoft, 'atividade_3', 0);									
-					$('Mapinha').Salva(nomeSoft, 'transicao_1', 0);		
-					
-					/*
+
+				/*
 					$('Mapinha').Salva(nomeSoft, 'automacao_atividade_1_parte_0', 2);
 
 					$('Mapinha').Salva(nomeSoft, 'automacao_atividade_2_parte_0', 2);
@@ -50,6 +47,20 @@
 					location.reload();
 				} 
 			}			
+		</script>
+		<script>
+		fetch("scripts/estrutura.xml")
+			.then(function(response){
+				response.text().then(function(data){
+					const m = new Mapinha("conteudo", nomeSoft);
+					m.parseXml(data);
+					console.log('data', data)
+					m.adicionaBotoesItens();
+				});
+			})
+			.catch(function(err){
+				console.error('Failed retrieving information', err);
+			});
 		</script>
 	</head>
 	<body>
@@ -71,18 +82,12 @@
 			<div id="abertura">
 				<div id="conteudo">
 					<a id="limpar" style="position:absolute; right:20px; top: 20px; color:RGB(210,25,42); font-weight:bold; ">Limpar dados</a>
-					<object id="Mapinha" name="Mapinha" type="application/x-shockwave-flash" data="applets/Mapinha.swf" width="960" height="480" wmode="transparent">
-						<param name="menu" value="false" />
-						<param name="movie" value="applets/Mapinha.swf" />
-						<param name="allowScriptAccess" value="sameDomain" />
-						<param name="wmode" value="transparent">
-					</object>
 				</div>
 			</div>
 			
 			<br class="limpador" />
 			<div id="rodape">
-				<a href="http://​m3.ime.unicamp.br​" target="_blank">Sobre o Matemática Multimídia</a>
+				<a href="http://m3.mat.br" target="_blank">Sobre o Matemática Multimídia</a>
 			</div>
 		</div>
 

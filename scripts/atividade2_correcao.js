@@ -11,8 +11,8 @@ var totalNumElementos=0;
 var tipo_grafico = 1;
 
 var iniciou_applet=false;
-var iniciou_sl =false;
-var iniicou_doc=false;
+var iniciou_sl =true;
+var iniicou_doc=true;
 /**************************************
 		INICIALIZACAO
 **************************************/
