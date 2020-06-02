@@ -16,6 +16,7 @@
 
 	<!-- 2: texto longo -->
 	<item><id>t1</id>
+	<estadoinicial>0</estadoinicial>
 		<tipo>transicao</tipo>
 		<nome>Transição</nome>
 		<descricao>Tela de transição.</descricao>
@@ -29,6 +30,7 @@
 	</item>	
 	
 	<item><id>a2</id>
+		<estadoinicial>0</estadoinicial>
 		<tipo>atividade</tipo>
 		<rotulo>2</rotulo>
 		<nome>Variável qualitativa e quantitativa discreta</nome>
@@ -43,6 +45,7 @@
 	</item>
 	
 	<item><id>a3</id>
+		<estadoinicial>0</estadoinicial>
 		<tipo>atividade</tipo>
 		<rotulo>3</rotulo>
 		<nome>Variável quantitativa contínua</nome>
