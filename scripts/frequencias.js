@@ -42,6 +42,7 @@ cores.push([247,148,31]);
 cores.push([255,243,1]);
 cores.push([58,181,75]);
 
+
 Array.prototype.sum = function() {
 	var s = 0;
 		for (var i = 0; i < this.length; i++) {
@@ -83,22 +84,25 @@ function pizza(labels,valores, totalDados){
 	applet.setAxesVisible(false,false)
 	applet.setGridVisible(false);
 
+	var appletWidth = Number(getAppletWidth());
+	var appletHeight = Number(getAppletHeight());
+
 	// Desloamento no eixo X. Gráifo fica sempre centrado no (0,0)
 	var deslocamentoX = 0.5;
 	
 	// Escalas dos eixos X e Y. Baseados na altura e larguda do applet, para garantir que fique 1:1 e o gráfico, portanto, circular.
-	if (applet.width>=applet.height) {
-		var razao = applet.width/applet.height;
+	if (appletWidth>=appletHeight) {
+		var razao = appletWidth/appletHeight;
 		eixoX = [-1*razao+deslocamentoX, 1*razao+deslocamentoX];
 		eixoY = [-1,1];
 	} else {
-		var razao = applet.height/applet.width;
+		var razao = appletHeight/appletWidth;
 		eixoX = [-1+deslocamentoX,1+deslocamentoX];
 		eixoY = [-1*razao, 1*razao];
 
 	};
 	applet.setCoordSystem(eixoX[0],eixoX[1],eixoY[0],eixoY[1]);
-	var alturaApplet = applet.height;
+	var alturaApplet = appletHeight;
 	var alturaGgb = eixoY[1] - eixoY[0];
 	var	relacaoAltura = relacaoAltura = alturaGgb/alturaApplet;	
 
@@ -393,10 +397,10 @@ function geraPoligonoCobrindo() {
 // Funcao de controle do evento de arraste do ponto de controle (linha vertical)
 function updateListenerPontoControle(objName) {
 		var applet = document.ggbApplet;
-		var xCoord = applet.getXCoord(objName);
-		var yCoord = applet.getYCoord(objName);
+		var xCoord = applet.getXcoord(objName);
+		var yCoord = applet.getYcoord(objName);
 		
-		if (yCoordPontoControle==null) yCoordPontoControle = applet.getYCoord(objName);	
+		if (yCoordPontoControle==null) yCoordPontoControle = applet.getYcoord(objName);	
 
 		applet.unregisterObjectUpdateListener('PontoControle');
 		if (xCoord > (eixoX[1]-1)) applet.setCoords(objName, (eixoX[1]-1),yCoordPontoControle);
@@ -471,6 +475,10 @@ function barras(labels,valores){
 	// para fazer com eixo x em valores originais, recalcular distancias 
 	eixoY[0]=0;
 	eixoY[1] = 1;	
+	
+	eixoX[0] = -1;
+	eixoX[1] = 11;
+	
 	//eixoY[1]=parseFloat(valores.max());	
 
 
@@ -485,8 +493,6 @@ function barras(labels,valores){
 	applet.setAxesVisible(true,true)
 
 	// Define valores dos eixos e inicializa applets e valores
-	eixoX[0] = -1;
-	eixoX[1] = 11;
 	//applet.setCoordSystem(eixoX[0],eixoX[1],eixoY[0]-margemY,eixoY[1]+margemY);
 	//applet.setCoordSystem(eixoX[0],eixoX[1],0, 1);
 
@@ -622,13 +628,30 @@ function larguraChar(char)
 	return 7;
 }
 
+function getAppletWidth()
+
+{
+	document.ggbApplet.evalCommand('tamanhoP=Point[{Corner(5)}]');
+	return Number(document.ggbApplet.getXcoord('tamanhoP'));
+}
+
+function getAppletHeight()
+
+{
+	document.ggbApplet.evalCommand('tamanhoP=Point[{Corner(5)}]');
+	return Number(document.ggbApplet.getYcoord('tamanhoP'));
+}
+
+
 // Estima a largura do label, em pixels.
 // TODO: Achar uma solução melhor para isso do que essa estimativa manual totalmente dependente da fonte.
 function larguraLabel(label) {
 
 	var applet = document.ggbApplet;
+	
 
-	var larguraApplet = applet.width;
+	//var larguraApplet = applet.width;
+	var larguraApplet = getAppletWidth();
 	var larguraGgb = (eixoX[1]) - (eixoX[0]);
 	var relacaoLargura = larguraGgb/larguraApplet;
 	
@@ -669,6 +692,9 @@ function xml2Str(xmlNode) {
 function mudarEscala(xMin,xMax,yMin,yMax){
 	var applet = document.ggbApplet;
 	
+	var appletWidth = Number(getAppletWidth());
+	var appletHeight = Number(getAppletHeight());
+
 	
 	stringXML = applet.getXML();
 
@@ -700,8 +726,8 @@ function mudarEscala(xMin,xMax,yMin,yMax){
 	} 
 	else
 	{
-		var sizeX = Number(applet.width)-2;
-		var sizeY = Number(applet.height)-2;
+		var sizeX = Number(appletWidth)-2;
+		var sizeY = Number(appletHeight)-2;
 //		console.log('size do applet',sizeX,sizeY);
 	}
 

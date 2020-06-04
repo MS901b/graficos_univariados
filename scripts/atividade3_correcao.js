@@ -11,6 +11,7 @@ var numDivisoes = 0;
 var amplitudeGrupo = 0;
 
 var iniciou_applet = false;
+var iniciou_applet_primeira_vez = false;
 var iniciou_sl = false;
 var inicio_doc = false;
 // Variaveis usadas para gerar os dados continuos na barrinha do histograma
@@ -38,7 +39,14 @@ function ggbOnInit() {
     // Carrega os dados globais de altura
 
     iniciou_applet = true;
-    carregaTudo();
+    
+	if (iniciou_applet_primeira_vez == false)
+	{
+		iniciou_applet_primeira_vez = true;
+		carregaTudo();		
+	}
+
+	
 }
 
 function carregaTudo() {
@@ -124,18 +132,18 @@ function carregaTudo() {
 
 
         // -------------
-        console.log("switch --- ");
+        //console.log("switch --- ");
 
         switch (PosicaoAtual.Parte) {
             case 0:
-                console.log("case 0");
+                //console.log("case 0");
                 numDivisoes = 4;
                 exibeValorDadosHistograma = true;
                 divideDadosHistograma(numDivisoes);
                 montaHistograma(numDivisoes);
                 break;
             case 1:
-                console.log("case 1");
+                //console.log("case 1");
                 numDivisoes = Number(getResp('atividade3_divisoes_p2'));
                 exibeValorDadosHistograma = true;
                 if (numDivisoes != '') {
@@ -144,21 +152,21 @@ function carregaTudo() {
                 }
                 break;
             case 2:
-                console.log("case 2");
+                //console.log("case 2");
                 numDivisoes = Number(getResp('atividade3_divisoes_p2'));
                 exibeValorDadosHistograma = true;
                 montaHistograma(numDivisoes);
                 break;
             case 3:
-                console.log("case 3");
+                //console.log("case 3");
                 numDivisoes = Number(getResp('atividade3_divisoes_p2'));
                 exibeValorDadosHistograma = true;
                 montaHistograma(numDivisoes);
 
                 //criar e esconder as retas necessarias
-                console.log("antes do applet 3");
+                //console.log("antes do applet 3");
                 configuraAppletParte3();
-                console.log("depois do applet 3");
+                //console.log("depois do applet 3");
 
                 break;
         }
@@ -437,7 +445,7 @@ function configuraAppletParte3() {
     applet.evalCommand('reta_mediana: x=' + b);
     applet.evalCommand('reta_moda: x=' + c);
 
-    console.log("definição das retas");
+    //console.log("definição das retas");
 
     applet.evalCommand('mediaLabel=Text["Média",(' + a + ',1.05)]');
     applet.evalCommand('medianaLabel=Text["Mediana",(' + b + ',0.95)]');
@@ -915,10 +923,10 @@ function corrige_q_5(valor) {
     var b = Math.round(quantilDoDado(160.9) * 100000) / 100000;
 
     var entrada = Math.round(Number(processaNumero(valor[0])) * 100000) / 100000;
-
-    var menor = Number(1 - b).toFixed(5);
-    var maior = Number(1 - a).toFixed(5);
-
+	
+	var menor = Number(1 - b).toFixed(5);
+	var maior = Number(1 - a).toFixed(5);
+	
     var retorno = (entrada >= menor) && (entrada <= maior);
 
     return [retorno];
@@ -1023,7 +1031,6 @@ function corrige_q_7(valor) {
 
         menor = Math.round(menor * 1000) / 1000;
         maior = Math.round(maior * 1000) / 1000;
-
         var retorno = (entrada >= menor) && (entrada <= maior);
 
         return [retorno];
@@ -1053,7 +1060,6 @@ function corrige_q_8(valor) {
 
         resposta1 = Math.round(resposta1 * 1000) / 1000;
         resposta2 = Math.round(resposta2 * 1000) / 1000;
-
         var retorno = (entrada >= resposta2) && (entrada <= resposta1);
 
         return [retorno];

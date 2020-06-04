@@ -90,8 +90,8 @@ function processaNumero(respStr)
 function updateListenerPontoControleSemPoly(objName) {
 		/*
 		var applet = document.ggbApplet;
-		var xCoord = applet.getXCoord(objName);
-		if (yCoordPontoControle==null) yCoordPontoControle = applet.getYCoord(objName);	
+		var xCoord = applet.getXcoord(objName);
+		if (yCoordPontoControle==null) yCoordPontoControle = applet.getYcoord(objName);	
 
 		applet.unregisterObjectUpdateListener('PontoControle');
 		if (xCoord > (eixoX[1]-1)) applet.setCoords(objName, (eixoX[1]-1),yCoordPontoControle);
@@ -110,8 +110,8 @@ function updateListenerPontoControleSemPoly(objName) {
 		applet.registerObjectUpdateListener('PontoControle','updateListenerPontoControleSemPoly');
 		*/
 		var applet = document.ggbApplet;
-		var xCoord = applet.getXCoord(objName);
-		if (yCoordPontoControle==null) yCoordPontoControle = applet.getYCoord(objName);	
+		var xCoord = applet.getXcoord(objName);
+		if (yCoordPontoControle==null) yCoordPontoControle = applet.getYcoord(objName);	
 
 		applet.setVisible('polyCover', false);
 		

@@ -12,6 +12,7 @@ var totalNumElementos = 0;
 var tipo_grafico = 1;
 
 var iniciou_applet = false;
+var iniciou_applet_primeira_vez = false;
 var iniciou_sl = true;
 var iniicou_doc = true;
 /**************************************
@@ -220,7 +221,6 @@ function carregaTudo() {
                 for (var i = 0; i < vetorCalcado[0].length; i++) {
                     vetorCalcado[0][i] = "" + String(vetorCalcado[0][i]);
                 }
-
                 barras(vetorCalcado[0], vetorCalcado[1]);
                 break;
             case 2:
@@ -238,9 +238,12 @@ function carregaTudo() {
 
 function ggbOnInit() {
     iniciou_applet = true;
-
-    carregaTudo();
-
+	
+	if (iniciou_applet_primeira_vez == false)
+	{
+		iniciou_applet_primeira_vez = true;
+		carregaTudo();		
+	}
 }
 
 /**************************************
@@ -421,7 +424,6 @@ function corrige_q_1_a() {
     a = Math.round(a);
     b = Math.round(b);
     */
-
     if ((Math.abs(angM - a) <= 2) && (Math.abs(angF - b) <= 2)) {
         return [true];
     } else {
