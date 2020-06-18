@@ -395,7 +395,7 @@ sup {
 }
 
 #ferramentas {
-    width: 125px;
+    width: 126px;
     height: 50px;
     background: url(../img_layout/barra-ferramentas.gif) no-repeat;
     position: fixed;
@@ -831,7 +831,7 @@ sup {
 }
 
 #questoes #texto_generico {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 #questoes #texto_generico h2 {
