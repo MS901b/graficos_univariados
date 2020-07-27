@@ -37,17 +37,22 @@
                 $('Mapinha').ApagaTudo('estat');
 
                 /*
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_1_parte_0', 2);
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_1_parte_0', 1);
 
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_2_parte_0', 2);
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_2_parte_1', 2);
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_2_parte_2', 2);
-                	
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_0', 2);
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_1', 2);
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_2', 2);
-                	$('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_3', 2);	
-                	*/
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_2_parte_0', 0);
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_2_parte_1', 0);
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_2_parte_2', 0);
+
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_0', 0);
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_1', 0);
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_2', 0);
+                $('Mapinha').Salva(nomeSoft, 'automacao_atividade_3_parte_3', 0);
+
+
+                var existeTabela = eval(getRespSoft("tabela_principal", "estat-dados"));
+                if (existeTabela != null) {
+                    montaVetoresDados();
+                }*/
                 location.reload();
             }
         }

@@ -31,6 +31,18 @@ Event.observe(document, 'flash:SalvaLocal', function(ev) {
 
 });
 
+function trataFloat(id) {
+    var valor = $(id).value;
+    if (valor != '') {
+        valor = valor.replace(",", ".");
+        if (!(isNaN(valor))) {
+            valor = parseFloat(valor);
+            valor = valor.toFixed(2);
+            $(id).value = valor;
+        }
+    }
+}
+
 function carregaRespostasPreenchidas() {
     switch (PosicaoAtual.Parte) {
         case 0:
@@ -52,22 +64,26 @@ function carregaRespostasPreenchidas() {
             $('parte2_q2_c').value = getResp('atividade2_parte2_q2_c');
 
             Event.observe('parte2_q2_c', 'change', function(evento) {
+                trataFloat('parte2_q2_c')
                 setResp('atividade2_parte2_q2_c', $('parte2_q2_c').value);
             });
 
             $('parte2_q3_a').value = getResp('atividade2_parte2_q3_a');
 
             Event.observe('parte2_q3_a', 'change', function(evento) {
+                trataFloat('parte2_q3_a')
                 setResp('atividade2_parte2_q3_a', $('parte2_q3_a').value);
             });
 
             $('parte2_q4_a').value = getResp('atividade2_parte2_q4_a');
 
             Event.observe('parte2_q4_a', 'change', function(evento) {
+                trataFloat('parte2_q4_a')
                 setResp('atividade2_parte2_q4_a', $('parte2_q4_a').value);
             });
 
             break;
+
 
         case 2:
 
@@ -101,6 +117,7 @@ function carregaRespostasPreenchidas() {
             $('parte3_q5_g_7').value = getResp('atividade2_parte3_q5_g_7');
 
             Event.observe('parte3_q5_g_7', 'change', function(evento) {
+                trataFloat('parte3_q5_g_7')
                 setResp('atividade2_parte3_q5_g_7', $('parte3_q5_g_7').value);
             });
 
@@ -108,6 +125,7 @@ function carregaRespostasPreenchidas() {
             $('parte3_q5_g_9').value = getResp('atividade2_parte3_q5_g_9');
 
             Event.observe('parte3_q5_g_9', 'change', function(evento) {
+                trataFloat('parte3_q5_g_9')
                 setResp('atividade2_parte3_q5_g_9', $('parte3_q5_g_9').value);
             });
 
@@ -238,12 +256,11 @@ function carregaTudo() {
 
 function ggbOnInit() {
     iniciou_applet = true;
-	
-	if (iniciou_applet_primeira_vez == false)
-	{
-		iniciou_applet_primeira_vez = true;
-		carregaTudo();		
-	}
+
+    if (iniciou_applet_primeira_vez == false) {
+        iniciou_applet_primeira_vez = true;
+        carregaTudo();
+    }
 }
 
 /**************************************
@@ -473,10 +490,10 @@ function corrige_q_2_c(valor) {
     var b = getResp('tabela_num_elementos');
 
     var arredondado = Math.round(a * 10000 / b) / 10000;
-
     var entrada = processaNumero(valor[0]);
 
     return [Math.abs(arredondado - entrada) <= 0.001];
+
 }
 
 function corrige_q_3_a(valor) {

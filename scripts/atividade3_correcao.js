@@ -35,18 +35,27 @@ Event.observe(document, 'flash:SalvaLocal', function(ev) {
     carregaTudo();
 });
 
+function trataFloat(id) {
+    var valor = $(id).value;
+    if (valor != '') {
+        valor = valor.replace(",", ".");
+        if (!(isNaN(valor))) {
+            valor = parseFloat(valor);
+            valor = valor.toFixed(2);
+            $(id).value = valor;
+        }
+    }
+}
+
 function ggbOnInit() {
     // Carrega os dados globais de altura
 
     iniciou_applet = true;
-    
-	if (iniciou_applet_primeira_vez == false)
-	{
-		iniciou_applet_primeira_vez = true;
-		carregaTudo();		
-	}
 
-	
+    if (iniciou_applet_primeira_vez == false) {
+        iniciou_applet_primeira_vez = true;
+        carregaTudo();
+    }
 }
 
 function carregaTudo() {
@@ -212,6 +221,7 @@ function carregaRespostasPreenchidas() {
             $('parte1_q5_a').value = getResp('atividade3_parte1_q5_a');
 
             Event.observe('parte1_q5_a', 'change', function(evento) {
+                trataFloat('parte1_q5_a')
                 setResp('atividade3_parte1_q5_a', $('parte1_q5_a').value);
             });
 
@@ -244,12 +254,14 @@ function carregaRespostasPreenchidas() {
             $('parte2_q7_a').value = getResp('atividade3_parte2_q7_a');
 
             Event.observe('parte2_q7_a', 'change', function(evento) {
+                trataFloat('parte2_q7_a')
                 setResp('atividade3_parte2_q7_a', $('parte2_q7_a').value);
             });
 
             $('parte2_q8_a').value = getResp('atividade3_parte2_q8_a');
 
             Event.observe('parte2_q8_a', 'change', function(evento) {
+                trataFloat('parte2_q8_a')
                 setResp('atividade3_parte2_q8_a', $('parte2_q8_a').value);
             });
 
@@ -283,6 +295,7 @@ function carregaRespostasPreenchidas() {
             $('parte3_q12_c').value = getResp('atividade3_parte3_q12_c');
 
             Event.observe('parte3_q12_c', 'change', function(evento) {
+                trataFloat('parte3_q12_c')
                 setResp('atividade3_parte3_q12_c', $('parte3_q12_c').value);
             });
 
@@ -291,6 +304,7 @@ function carregaRespostasPreenchidas() {
             $('parte4_q13_a').value = getResp('atividade3_parte4_q13_a');
 
             Event.observe('parte4_q13_a', 'change', function(evento) {
+                trataFloat('parte4_q13_a')
                 setResp('atividade3_parte4_q13_a', $('parte4_q13_a').value);
             });
 
@@ -923,10 +937,10 @@ function corrige_q_5(valor) {
     var b = Math.round(quantilDoDado(160.9) * 100000) / 100000;
 
     var entrada = Math.round(Number(processaNumero(valor[0])) * 100000) / 100000;
-	
-	var menor = Number(1 - b).toFixed(5);
-	var maior = Number(1 - a).toFixed(5);
-	
+
+    var menor = Number(1 - b).toFixed(5);
+    var maior = Number(1 - a).toFixed(5);
+
     var retorno = (entrada >= menor) && (entrada <= maior);
 
     return [retorno];

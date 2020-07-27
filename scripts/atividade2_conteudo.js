@@ -61,14 +61,15 @@ var Questoes = [{ //Parte 1
                     tipo: 'input',
                     corrigir: corrige_q_2_b,
                     enunciado: 'Qual é a frequência absoluta desse valor?',
-                    msgErro: 'Você pode obter essa informação a partir do gráfico de barras.'
+                    msgErro: 'Você pode obter essa informação a partir do gráfico de barras.',
+                    msgAjuda: 'A frequência absoluta é o valor exibido acima das barras.'
                 },
                 { //C
                     tipo: 'input',
                     corrigir: corrige_q_2_c,
                     enunciado: 'Qual é a frequência relativa desse valor?',
                     msgErro: 'A frequência relativa pode ser obtida em qualquer um dos dois gráficos.',
-                    msgAjuda: 'Você pode dar a reposta em fração, usando "/", ou em porcentagem, com o símbolo "%", ou, ainda, em números decimais, mas, neste caso, sempre com duas casas depois da vírgula.'
+                    msgAjuda: 'Você pode dar a reposta em fração, usando "/", ou em porcentagem, com o símbolo "%", ou, ainda, em números decimais, mas, neste caso, sempre com duas casas depois da vírgula. Para obter a frequência relativa, você deve dividir a frequência absoluta (de um valor selecionado) pela quantidade total de pessoas da amostra.'
                 }
             ]
         },
