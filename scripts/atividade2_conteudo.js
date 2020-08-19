@@ -68,7 +68,7 @@ var Questoes = [{ //Parte 1
                     tipo: 'input',
                     corrigir: corrige_q_2_c,
                     enunciado: 'Qual é a frequência relativa desse valor?',
-                    msgErro: 'A frequência relativa pode ser obtida em qualquer um dos dois gráficos.',
+                    msgErro: 'A frequência relativa pode ser obtida mais facilmente no gráfico de setores.',
                     msgAjuda: 'Você pode dar a reposta em fração, usando "/", ou em porcentagem, com o símbolo "%", ou, ainda, em números decimais, mas, neste caso, sempre com duas casas depois da vírgula. Para obter a frequência relativa, você deve dividir a frequência absoluta (de um valor selecionado) pela quantidade total de pessoas da amostra.'
                 }
             ]
@@ -112,14 +112,14 @@ var Questoes = [{ //Parte 1
                     corrigir: corrige_q_5_b,
                     dados: '<div><table style="width: 200px"><tr><td>Pé pequeno</td><td style="width: 100px"><div id="corretor_q5_b_1"><input id="parte3_q5_b_1" style="width:40px; margin: 0 5px !important;"/></div></td></tr><tr><td>Pé grande</td><td style="width: 100px"><div id="corretor_q5_b_2"><input id="parte3_q5_b_2" style="width:40px; margin: 0 5px !important;"/></div></td></tr></table><br class="limpador" /><br>',
                     enunciado: 'Quantos dados estão em cada uma das categorias?',
-                    msgErro: 'O número em cima de cada barra indica a frequência absoluta daquele valor.'
+                    msgErro: 'O número em cima de cada barra indica a frequência absoluta daquele valor (some as quantidades para cada categoria).'
                 },
                 { //C
                     tipo: 'generico',
                     corrigir: corrige_q_5_c,
                     dados: '<div><table style="width: 200px"><tr><td>Pé pequeno</td><td style="width: 100px"><div id="corretor_q5_g_7"><input id="parte3_q5_g_7" style="width:40px; margin: 0 5px !important;"/></div></td></tr><tr><td>Pé grande</td><td style="width: 100px"><div id="corretor_q5_g_9"><input id="parte3_q5_g_9" style="width:40px; margin: 0 5px !important;"/></div></td></tr></table><br class="limpador" /><br>',
                     enunciado: 'Calcule a frequência relativa de cada categoria.',
-                    msgErro: 'Para calcular a frequência obtenha quantos dados existem em uma categoria e divida pelo total de dados.',
+                    msgErro: 'Para calcular a frequência obtenha quantos dados existem em uma categoria (calculados no item “b”) e divida pelo total de dados.',
                     msgAjuda: 'Você pode dar a reposta em fração, usando "/", ou em porcentagem, com o símbolo "%", ou, ainda, em números decimais, mas, neste caso, sempre com duas casas depois da vírgula.'
                 }
             ]

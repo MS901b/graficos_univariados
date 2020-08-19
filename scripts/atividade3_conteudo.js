@@ -41,7 +41,7 @@ var Questoes = [{ //Parte 1
                     corrigir: corrige_q_1_a,
                     enunciado: 'Qual intervalo contém o maior número de alunos?',
                     dados: '<div><span class="a_esquerda">[</span><div id="corretor_q1_g_1"><input id="parte1_q1_g_1" style="width:30px; margin: 0 5px !important;"/></div><span class="a_esquerda antes_depois depois">;</span><div id="corretor_q1_g_2"><input id="parte1_q1_g_2" style="width:30px; margin: 0 5px !important;"/></div><span class="a_esquerda">)</span></div><br class="limpador" />',
-                    msgErro: 'Você pode obter essas informações no histograma.',
+                    msgErro: 'Você pode obter essas informações no histograma, de acordo com o número acima de cada intervalo.',
                     msgAjuda: 'Se existirem dois ou mais intervalos com uma mesma quantidade de dados, escolha um deles para responder a questão.'
                 },
 
@@ -50,7 +50,7 @@ var Questoes = [{ //Parte 1
                     corrigir: corrige_q_1_b,
                     enunciado: 'Qual intervalo contém o menor número de alunos?',
                     dados: '<div><span class="a_esquerda">[</span><div id="corretor_q1_g_3"><input id="parte1_q1_g_3" style="width:30px; margin: 0 5px !important;"/></div><span class="a_esquerda antes_depois depois">;</span><div id="corretor_q1_g_4"><input id="parte1_q1_g_4" style="width:30px; margin: 0 5px !important;"/></div><span class="a_esquerda">)</span></div><br class="limpador" />',
-                    msgErro: 'Você pode obter essas informações no histograma.',
+                    msgErro: 'Você pode obter essas informações no histograma, de acordo com o número acima de cada intervalo.',
                     msgAjuda: 'Se existirem dois ou mais intervalos com a mesma quantidade de dados, escolha qualquer um deles para responder a questão.'
                 }
             ]
@@ -64,7 +64,7 @@ var Questoes = [{ //Parte 1
                     tipo: 'input',
                     corrigir: corrige_q_2,
                     enunciado: 'Qual é a amplitude de cada intervalo?',
-                    msgErro: 'Escolha um intervalo, identifique seus extremos e faça a subtração dos valores.',
+                    msgErro: 'Escolha um intervalo, identifique seus extremos e faça a subtração dos valores (indicados abaixo de cada barra).',
                     msgAjuda: '"Amplitude" é um sinônimo de "tamanho".'
                 }
             ]
@@ -84,8 +84,8 @@ var Questoes = [{ //Parte 1
                         { value: '3', label: '<span id="q3_total_dados">#NUM#</span>' },
                         { value: '4', label: '10' }
                     ],
-                    msgErro: 'Posicione o segmento no maior valor possível e observe o valor fornecido.',
-                    msgAjuda: 'Para mover o segmento, clique e arraste o ponto.'
+                    msgErro: 'Posicione o segmento no maior valor possível e observe o valor fornecido (extremo do gráfico).',
+                    msgAjuda: 'Para mover o segmento, clique e arraste o ponto horizontalmente.'
                 }
             ]
         },
@@ -148,7 +148,7 @@ var Questoes = [{ //Parte 1
                     corrigir: corrige_q_7,
                     //**CENTIMETROS enunciado: 'Que proporção da sala tem altura maior que 1,60m?',
                     enunciado: 'Que proporção da sala tem altura maior que 160 cm?',
-                    msgErro: 'Use o segmento de reta para obter o valor procurado. Lembre-se que ele fornece a área à esquerda de sua posição.',
+                    msgErro: 'Use o segmento de reta para obter o valor procurado. Lembre-se que ele fornece a área à esquerda de sua posição, ou seja, a resposta será o complementar',
                     msgAjuda: 'Dê a reposta em porcentagem, usando o símbolo "%", ou com números decimais, neste caso, sempre com duas casas depois da vírgula.'
                 }
             ]
@@ -163,7 +163,7 @@ var Questoes = [{ //Parte 1
                     esperando: true,
                     corrigir: corrige_q_8,
                     enunciado: 'Que proporção da sala tem altura entre 165 cm e 175 cm?',
-                    msgErro: 'Obtenha a proporção para 165 cm e, em seguida, a proporção para 175 cm. A subtração desses valores fornece a área de que região do gráfico?',
+                    msgErro: 'Obtenha a proporção para 165 cm e, em seguida, a proporção para 175 cm (posicionando a reta em cada coordenada). A subtração desses valores é a proporção da sala. Mas este resultado fornece a área de que região do gráfico?',
                     msgAjuda: 'Dê a reposta em porcentagem, usando o símbolo "%", ou com números decimais, neste caso, sempre com duas casas depois da vírgula.'
                 }
             ]
@@ -194,7 +194,7 @@ var Questoes = [{ //Parte 1
                     corrigir: corrige_q_10,
                     enunciado: 'Qual é o valor de altura que deixa 10% dos indivíduos abaixo dela?',
                     msgErro: 'Como a área total é igual a 1, então 10%, corresponde a 0,1.',
-                    msgAjuda: 'Use a barra e a área corresponde.'
+                    msgAjuda: 'Use a barra, pois é correspondente à área.'
                 }
             ]
         },
@@ -269,8 +269,8 @@ var Questoes = [{ //Parte 1
                     selecionada: apaga_selecao_q15,
                     enunciado: 'Qual é o intervalo que contém 50% dos dados centrais, que é o intervalo entre o 1º e o 3º <a id="quartil">quartil</a>?',
                     dados: '<div><span class="a_esquerda">[</span><div id="corretor_q14_g_1"><input id="parte4_q14_g_1" style="width:30px; margin: 0 5px !important;"/></div><span class="a_esquerda antes_depois depois">;</span><div id="corretor_q14_g_2"><input id="parte4_q14_g_2" style="width:30px; margin: 0 5px !important;"/></div><span class="a_esquerda">)</span></div><br class="limpador" />',
-                    msgErro: 'Obtenha o valor que deixa 25% dos dados abaixo dele, este será o limitante inferior do intervalo procurado. Para obter o outro extremo encontre o valor que deixa 75% dos dados abaixo dele.',
-                    msgAjuda: 'O quartil é qualquer um dos três valores que divide o conjunto ordenado de dados em quatro partes iguais. Por exemplo, 1º quartil corresponde ao 25% quantil.'
+                    msgErro: 'Obtenha o valor que deixa 25% dos dados abaixo dele, este será o limitante inferior do intervalo procurado. Para obter o outro extremo encontre o valor que deixa 75% dos dados abaixo dele. Após encontrá-los, preencha as coordenadas de acordo com os valores encontrados.',
+                    //msgAjuda: 'O quartil é qualquer um dos três valores que divide o conjunto ordenado de dados em quatro partes iguais. Por exemplo, 1º quartil corresponde ao 25% quantil.'
                 }
             ]
         },

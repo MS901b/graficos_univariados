@@ -1249,13 +1249,15 @@ function corrige_q_15(valor) {
     var r = q.MsgErro.divCont;
     var p = r.firstDescendant();
 
-    var msgErro = '';
-    if (!resp1) msgErro = msgErro + 'Chama-se "moda" o valor mais frequente em um grupo de valores.<br>';
-    if (!resp2) msgErro = msgErro + 'Para se obter a média de um conjunto de dados, basta dividir a soma de todos os valores da amostra pelo número total de valores.<br>';
-    if (!resp3) msgErro = msgErro + 'A mediana é um valor que divide o conjunto de dados em duas partes que, necessariamente, possuem o mesmo número de elementos. Isso é feito de tal modo que o número de valores menores ou iguais à mediana seja igual ao número de valores maiores ou iguais a ela.<br>';
+    var msgErro = 'Mova o segmento até a reta que representa cada medida resumo e preencha respectivamente com o valor indicado no eixo horizontal.';
+
+    if (!resp1) msgErro = msgErro + '';
+    if (!resp2) msgErro = msgErro + '';
+    if (!resp3) msgErro = msgErro + '';
 
     p.update(msgErro);
     return [(resp1 && resp2 && resp3)];
+
 }
 
 function seleciona_q15() {
